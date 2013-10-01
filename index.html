@@ -1,0 +1,19 @@
+_---
+layout: default
+title: Your New Jekyll Site
+---
+
+<div id="home">
+  <h1>Blog Posts</h1>
+
+  <!-- site is {{ site.url }} -->
+
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+        <p> {{ post.excerpt }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

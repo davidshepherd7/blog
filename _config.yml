@@ -1,0 +1,11 @@
+name: Your New Jekyll Site
+markdown: redcarpet
+pygments: true
+timezone: Europe/London
+# encoding: UTF8
+
+# Only use title in urls
+permalink: /:title.html
+
+# url for compsoc
+url: http://compsoc.man.ac.uk/~shep
