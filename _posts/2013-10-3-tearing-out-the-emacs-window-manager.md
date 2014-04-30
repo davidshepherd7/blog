@@ -4,6 +4,8 @@ title:  "Tearing out the Emacs windows manager"
 categories: emacs xmonad tiling-windows-manager
 ---
 
+*Edit: I've created a [small emacs package](https://github.com/davidshepherd7/frames-only-mode) based on this post.*
+
 There's an old joke: "Emacs is a great operating system, but it's a shame they didn't include a decent text editor". Obviously since I'm writing about Emacs I don't agree with the second part, but it's hard to argue that Emacs' feature list isn't a little over the top. This post will describe how to go a small way towards fixing that by replacing Emacs' built in [tiling window manager][] with something more general.
 
 
@@ -129,7 +131,7 @@ Appendix: Dealing with auto-complete
 
 The best way I've found to avoid problems with extra autocompletion buffer frames is to use the wonderful `ido` package, which displays completions inside the minibuffer instead. To make it work for everything you might want to auto-complete you'll also need the `ido-ubiquitous` and `smex` packages. Completion is now done with a handy menu looking something like this
 
-![illustration of ido ]({{ site.url }}/assets/ido.png)
+![illustration of ido ]({{ site.url }}/ido.png)
 
 Well, actually to get it do show completions in a vertical list you need a little bit more configuration:
 
