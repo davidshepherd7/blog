@@ -1,6 +1,6 @@
 name: "I'm not very good at witty names"
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 timezone: Europe/London
 # encoding: UTF8
 
