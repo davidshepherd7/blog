@@ -11,34 +11,34 @@ First of all I should note that there is an existing package called [`e-sink`](h
 So, here's my solution:
 
 {% highlight bash %}
-# Intelligently run emacsclient, and run server if needed. This preserves
-# all command line args, which doesn't happen if we allow emacsclient to
-# create the server itself (by setting -a '').
-function emacs_client_or_server
+# The emacs or emacsclient to use
+function _emacsfun
 {
-    emacsclient -c -n "$@" -a 'false' || \
-        (\emacs --daemon && emacsclient -c -n "$@")
+    # Replace with `emacs` to not run as server/client
+    emacsclient -c -n $@
 }
 
-# Emacsclient with ability to read from piped stdin.
+
+# An emacs 'alias' with the ability to read from stdin
 function e
 {
     # If the argument is - then write stdin to a tempfile and open the
-    # tempfile. Otherwise just run emacsclient. -c and -n are just my
-    # preferred options.
+    # tempfile.
     if [[ $1 == - ]]; then
         tempfile=$(mktemp emacs-stdin-$USER.XXXXXXX --tmpdir)
         cat - > $tempfile
-        emacs_client_or_server -e "(progn (find-file \"$tempfile\")
-                                                    (set-visited-file-name nil)
-                                                    (rename-buffer \"*stdin*\" t))
-                                             " 2>&1 > /dev/null
+        _emacsfun -e "(progn (find-file \"$tempfile\")
+                             (set-visited-file-name nil)
+                             (rename-buffer \"*stdin*\" t))
+                 " 2>&1 > /dev/null
     else
-        emacs_client_or_server "$@"
+        _emacsfun "$@"
     fi
 }
 {% endhighlight %}
 
+
+If you prefer to use a standalone emacs just replace `emacsclient -c -n` in `_emacsfun` with `emacs`.
 
 The function is called as
 
@@ -51,9 +51,6 @@ or
 {% highlight bash %}
 e hello_world.txt
 {% endhighlight %}
-
-
-It's actually slightly more complex than is strictly required because I like to run emacs in server mode and spawn clients at will. So the helper function `emacs_client_or_server` also handles the creation of a server when required. If you prefer to use a standalone emacs just replace `emacs_client_or_server -c -n` with `emacs`.
 
 One more note: each time you read from stdin a temporary file in `/tmp` is created, these are typically cleared on reboot which is good enough for me. If you need them to be gone immediately you could add `rm $tempfile` inside the `if` statement.
 
