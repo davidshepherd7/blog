@@ -6,13 +6,13 @@ title: I'm not very good at witty names
 <div id="home">
 
   <!-- site is {{ site.url }} -->
+  {% for post in site.posts %}
+  <article>
+    <header>
+      <h4><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h4>
+    </header>
+    <div class="entry">{{ post.excerpt }}</div>
+  </article>
+  {% endfor %}
 
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
-        <p> {{ post.excerpt }}</p>
-      </li>
-    {% endfor %}
-  </ul>
 </div>
