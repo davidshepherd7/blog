@@ -29,5 +29,5 @@ The abstract is:
 
 In plain English: I investigated when and why one class of algorithms becomes more efficent than another class of algorithms for an important problem in the study of magnetic materials.
 
-Here's the [paper]({{ site.url}}/trans-mag-paper-2014.pdf) itself.
+Here's the [paper]({{ site.baseurl }}/trans-mag-paper-2014.pdf) itself.
 

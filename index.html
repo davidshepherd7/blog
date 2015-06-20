@@ -5,11 +5,11 @@ title: Typical Technological Trickery
 
 <div id="home">
 
-  <!-- site is {{ site.url }} -->
+  <!-- site is {{ site.baseurl }} -->
   {% for post in site.posts %}
   <article>
     <header>
-      <h4><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h4>
+      <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
     </header>
     <div class="entry">{{ post.excerpt }}</div>
   </article>

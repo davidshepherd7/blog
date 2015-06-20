@@ -131,7 +131,7 @@ Appendix: Dealing with auto-complete
 
 The best way I've found to avoid problems with extra autocompletion buffer frames is to use the wonderful `ido` package, which displays completions inside the minibuffer instead. To make it work for everything you might want to auto-complete you'll also need the `ido-ubiquitous` and `smex` packages. Completion is now done with a handy menu looking something like this
 
-![illustration of ido ]({{ site.url }}/ido.png)
+![illustration of ido ]({{ site.baseurl }}/ido.png)
 
 Well, actually to get it do show completions in a vertical list you need a little bit more configuration:
 
