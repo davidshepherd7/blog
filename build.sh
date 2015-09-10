@@ -5,4 +5,4 @@ set -o nounset
 jekyll build
 
 # Copy to server
-scp -r _site/* compsoc:~/public_html/
+scp -r _site/* aws:~/public_html/
