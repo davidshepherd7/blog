@@ -6,4 +6,4 @@ jekyll build
 
 # Copy to servers
 scp -r _site/* compsoc:~/public_html/
-scp -r _site/* ec2-user@:~/public_html/
+scp -r _site/* aws:~/public_html/
