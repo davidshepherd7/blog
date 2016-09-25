@@ -358,3 +358,16 @@ Small Device Styles
     font-size: 11px;
   }
 }
+
+
+/*******************************************************************************
+My customisation
+*******************************************************************************/
+
+.ds-blockquote {
+    margin-bottom: 0.5em;
+}
+
+.ds-quote-attribution {
+    margin-bottom: 2em;
+}
