@@ -13,4 +13,4 @@ permalink: /:title.html
 url: http://techtrickery.com
 
 # url for testing
-# url: file:///home/david/Dropbox/web/blog/_site
+# url: http://localhost:4000/
