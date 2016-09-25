@@ -2,6 +2,17 @@
 
 'use strict'
 
+/*
+Usage:
+
+* Plug in your kindle
+* Mount it (e.g. by opening calibre or opening it in nautilus)
+* Optionally copy the clippings file from "/media/david/Kindle/documents/My\ Clippings.txt" to disk
+* Run ./my-clippings-parser.js [path/to/clippings/file]
+* Get html output to stdout
+
+*/
+
 const fs = require('fs')
 const moment = require('moment')
 
