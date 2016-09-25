@@ -18,6 +18,7 @@ fs.readFile(process.argv[2], 'utf8', function (err,fileString) {
 function parseFile(fileString) {
 	return fileString
 		.split('==========')
+		.map(s => s.trim())
 		.filter(x => x.includes("- Your Highlight")) // Filter out bookmarks
 		.map(parse)
 		.filter(x => x.quote && x.title && x.author)
@@ -26,9 +27,9 @@ function parseFile(fileString) {
 
 function parse(str) {
 	const temp = str.split(/\n/)
-	const book = temp[1]
-	const highlight = temp[2]
-	const quote = temp.slice(3)
+	const book = temp[0]
+	const highlight = temp[1]
+	const quote = temp.slice(2)
 		.map(s => s.trim())
 		.filter(s => s !== "")
 		.join(' ')
