@@ -5,7 +5,7 @@
 const fs = require('fs')
 const moment = require('moment')
 
-fs.readFile('/home/david/Dropbox/ebooks/Unknown/My Clippings (185)/My Clippings - Unknown.txt', 'utf8', function (err,fileString) {
+fs.readFile(process.argv[2], 'utf8', function (err,fileString) {
 	if (err) {
 		return console.log(err)
 	}

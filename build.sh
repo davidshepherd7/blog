@@ -8,6 +8,7 @@ cd "$SCRIPTDIR"
 
 
 # Generate quotes page
+quote_file=($HOME/Dropbox/ebooks/Kindle/My\ Clippings*/*.txt)
 cat <<EOF > quotes.md
 ---
 layout: default
@@ -15,7 +16,7 @@ title: "Quotes"
 ---
 
 
-$(./_quotes/my-clippings-parser.js)
+$(./_quotes/my-clippings-parser.js "${quote_file[@]}")
 EOF
 
 # Build html files
