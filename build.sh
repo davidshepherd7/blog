@@ -17,6 +17,8 @@ title: "Quotes"
 
 
 $(./_quotes/my-clippings-parser.js "${quote_file[@]}")
+
+$(./_quotes/my-clippings-parser.js "../manual_quotes.txt")
 EOF
 
 # Build html files
