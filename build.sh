@@ -22,7 +22,7 @@ $(./_quotes/my-clippings-parser.js "../manual_quotes.txt")
 EOF
 
 # Build html files
-jekyll build
+bundle exec jekyll build
 
 # Copy to servers
 scp -r _site/* compsoc:~/public_html/
