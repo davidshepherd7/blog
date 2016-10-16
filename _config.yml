@@ -17,3 +17,5 @@ url: http://techtrickery.com
 
 gems:
   - jekyll-feed
+
+exclude: [Gemfile, Gemfile.lock, README.md, build.sh, preview.sh]
