@@ -13,17 +13,17 @@ same problem on my work machine which runs a different version of Ubuntu. So it
 seemed likely that the issue was something in my configuration rather than a
 real bug.
 
-I started by [enabling persistant systemd logs](systemd-logs) so that I could
+I started by [enabling persistant systemd logs][systemd-logs] so that I could
 read the logs recorded during a shutdown. Once that was set up I rebooted the
 laptop, then checked the logs with `journalctl --boot=-1`. Skimming through the
 last few items I noticed that there was a 28 second wait before the line
 `Stopped LSB: "privilege escalation detection system"` which seemed suspicious.
 
-Some more googling and I found [this askUbuntu question](askUbuntu) by someone
+Some more googling and I found [this askUbuntu question][askUbuntu] by someone
 having the same issue as me. It turns out that I'd unwittingly installed
-something called ["ninja"](ninja-daemon) that watches out for suspicious looking
+something called ["ninja"][ninja-daemon] that watches out for suspicious looking
 programs running as root. I suspect that on both of my machines I had attempted
-to install [ninja-the-build system](ninja-build) (`apt-get install ninja-build`)
+to install [ninja-the-build system][ninja-build] (`apt-get install ninja-build`)
 and instead installed ninja-the-monitoring-daemon (`apt-get install ninja`).
 
 Moral of the story: check out unknown packages using `apt-cache show` before you install them!
