@@ -30,21 +30,34 @@
       </header>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        {{ content }}
-      </section>
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                {{ content }}
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Projects </h3>
+            <ul>
+                <li> <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>: An emacs minor mode to automatically add spacing around operators </li>
+
+            </ul>
+
+            <h3> Etc </h3>
+            <ul>
+                <li><a href="{{site.url}}/about.html">About me</a></li>
+                <li><a href="{{site.url}}/quotes.html">Some quotes that I like</a></li>
+                <li><a href="{{site.url}}/feed.xml">Atom feed</a></li>
+                <li><a href="https://github.com/davidshepherd7">My github</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        Some things <a href="{{site.url}}/about.html">about</a> me.<br />
-        Look at my code on <a href="https://github.com/davidshepherd7">github</a>.<br />
-        <a href="{{site.url}}/quotes.html">Some quotes</a> that I like.<br />
-        This website uses the <a href="https://github.com/jsncostello/slate">slate</a> theme.<br />
-        An <a href="{{site.url}}/feed.xml">atom feed.</a>
-    </div>
-    </footer>
   </body>
 </html>
