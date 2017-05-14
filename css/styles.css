@@ -412,9 +412,24 @@ My customisation
 *******************************************************************************/
 
 .ds-blockquote {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .ds-quote-attribution {
-    margin-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+.projects-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 0.9em
+}
+
+.project-name {
+  display: block;
+  font-weight: bold;
+}
+
+.project {
+  margin: 2 0 2 0;
 }
