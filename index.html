@@ -5,14 +5,14 @@ title: Typical Technological Trickery
 
 <div id="home">
 
-  <!-- site is {{ site.url }} -->
-  {% for post in site.posts %}
-  <article>
-    <header>
-      <h4><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h4>
-    </header>
-    <div class="entry">{{ post.excerpt }}</div>
-  </article>
-  {% endfor %}
+    <!-- site is {{ site.url }} -->
+    {% for post in site.posts %}
+    <article>
+        <header>
+            <h4><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h4>
+        </header>
+        <div class="entry">{{ post.excerpt }}</div>
+    </article>
+    {% endfor %}
 
 </div>
