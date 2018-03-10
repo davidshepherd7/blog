@@ -22,7 +22,7 @@ custom_excerpt: "A program to generate grammatically correct Polish phrases."
     Toggle translation
 </button>
 
-<script src="http://cdn.rawgit.com/davidshepherd7/polish-generator/v1/bundle.js"></script>
+<script src="http://cdn.rawgit.com/davidshepherd7/polish-generator/v2-subject-object/bundle.js"></script>
 
 
 
