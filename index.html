@@ -11,7 +11,13 @@ title: Typical Technological Trickery
         <header>
             <h4><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></h4>
         </header>
-        <div class="entry">{{ post.excerpt }}</div>
+        <div class="entry">
+            {% if post.custom_excerpt %}
+            {{ post.custom_excerpt }}
+            {% else %}
+            {{ post.excerpt }}
+            {% endif %}
+        </div>
     </article>
     {% endfor %}
 
