@@ -47,8 +47,9 @@ My somewhat hacky solution is to add the following code to my ert-runner
 
 ```
 (defun log-trace-buffer (&rest _)
-  (with-current-buffer trace-buffer
-    (message (buffer-substring-no-properties (point-min) (point-max)))))
+  (when (get-buffer trace-buffer)
+    (with-current-buffer trace-buffer
+      (message (buffer-substring-no-properties (point-min) (point-max))))))
 (add-to-list 'ert-runner-reporter-run-ended-functions #'log-trace-buffer)
 ```
 
