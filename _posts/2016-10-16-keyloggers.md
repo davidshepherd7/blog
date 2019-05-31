@@ -5,7 +5,7 @@ categories: linux X11 security
 ---
 
 It's an old adage that you can't secure a computer against people with physical
-access to. I was interested in this idea, so I was exploring what could be done
+access to it. I was interested in this idea, so I was exploring what could be done
 with only keyboard and mouse access to a typical Ubuntu machine (i.e. without
 being able to plug in usb devices or pull out hard drives) when I came across
 the `xinput test` command. I'm sure this is old hat to anyone with a real
