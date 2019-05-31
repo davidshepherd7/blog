@@ -26,4 +26,3 @@ bundle exec jekyll build
 
 # Copy to servers
 rsync -aqzP --delete ./_site/ aws:~/public_html
-rsync -aqzP --delete ./_site/ compsoc:~/public_html/
