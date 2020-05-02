@@ -4,8 +4,6 @@ title: "Notes from \"Africa: a biography of the continent\" by John Reader"
 categories:
 ---
 
-# Introduction
-
 I read this book over the last few months hoping to get some more insight into
 African history. It's a great book and very readable, although some parts drag
 on a bit or repeat things (I skimmed over a few pages).
