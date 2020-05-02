@@ -21,6 +21,8 @@ $(./_quotes/my-clippings-parser.js "${quote_file[@]}")
 $(./_quotes/my-clippings-parser.js "../manual_quotes.txt")
 EOF
 
+bundle install
+
 # Build html files
 bundle exec jekyll build
 
