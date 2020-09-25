@@ -3,10 +3,13 @@ layout: default
 title:  "About me"
 ---
 
-I'm David Shepherd, currently a software engineer at [Biosite Systems](http://www.biositesystems.co.uk/).
+I'm David Shepherd, currently a software engineer building financial infrastructure in Africa at [Wave](http://wave.com/en).
 
-Previously I worked as a research assistant at the University of Manchester where I looked at using machine learning techniques to recognise electromagnetic signals for AWE, and at scheduling algorithms for scientific computing in the cloud.
+Previously I worked at [Biosite Systems](http://www.biositesystems.co.uk/).
 
-Prior to that I was a PhD student at the University of Manchester doing research on computational methods for micromagnetics.
+Before that I was at the University of Manchester where I did research on
+computational methods for micromagnetics, machine learning techniques for
+recognising electromagnetic signals, and scheduling algorithms for scientific
+computing in the cloud.
 
 Get in touch at `[my name, no spaces or anything]7@gmail.com`.
