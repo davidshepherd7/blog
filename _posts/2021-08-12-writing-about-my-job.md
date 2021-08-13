@@ -5,13 +5,14 @@ date:   2021-08-13
 categories: wave ea jobs
 ---
 
-*Cross posted from the [EA forum](https://forum.effectivealtruism.org/posts/pyvybGkGYaFAeNtGi/writing-about-my-job-software-engineer-at-wave).*
+In response to [Aaron Gertler's prompt on the EA
+forum](https://forum.effectivealtruism.org/posts/nf72oiJddwDhoJ4QH/you-should-write-about-your-job)
+I'm writing a bit about my job. I hope this will be useful to people who are
+considering software engineering as a career path and EA software engineers who
+are in positions where their work is not EA relevant.
 
-In response to [Aaron Gertler's
-prompt](https://forum.effectivealtruism.org/posts/nf72oiJddwDhoJ4QH/you-should-write-about-your-job)
-I'm writing a bit about my job. I hope this will be useful to software engineers
-who are in positions where their work is not EA relevant and EAs who are
-considering software engineering as a career path.
+This post is cross posted from the [EA forum](https://forum.effectivealtruism.org/posts/pyvybGkGYaFAeNtGi/writing-about-my-job-software-engineer-at-wave).
+
 
 # The basics
 
@@ -219,8 +220,8 @@ aptitude for learning about technical subjects.
 
 # Contact me/hiring
 
-If you have any follow up questions feel free to post them here or email me at
-"davidshepherd7 [at] gmail".
+If you have any follow up questions feel free to post them on the EA forum or
+email me about them.
 
 We're currently hiring software engineers, product managers, and a bunch of
 other remote positions. So if any of what I've described sounds like something
