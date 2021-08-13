@@ -24,7 +24,9 @@ EOF
 bundle install
 
 # Build html files
-bundle exec jekyll build
+jekyll build
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/user-data-replace-key-pair-ec2/
 
 # Copy to servers
 rsync -aqzP --delete ./_site/ aws:~/public_html
