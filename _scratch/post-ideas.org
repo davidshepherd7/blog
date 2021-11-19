@@ -1,0 +1,71 @@
+* Complex developer setups - are they worth it
+** I don't know whether to recommend this to junior devs
+** Can take some work to be worthwhile
+** I hada lot of fun tweaking emacs, Linux, etc
+** It's also a great learning experience
+*** Find out how your OS works in more detail
+*** Debugging practice
+*** Experience with wide variety of languages/etc (mostly worse than what engs use in prod these days, but interesting sometimes)
+*** Forces you to learn to prioritise, e.g. just accept some minor issues b/c more work to fix than is worth it.
+*** Maybe encourages some product thinking? How do I want X to work
+** Even now I don't always want to do this
+** But, payoffs can be good
+*** e.g. test/snapshot runner keybinds; typechecking in editor
+*** Tiling window manager helps a lot with RSI
+*** Trivial to add most information to status bar, e.g. I added time in additional timezones, pending apt updates, my ip address b/c they were all useful to me. Each took like 1-5 minutes to figure out the right shell command to get the data and paste it into a config.
+** But if you use stanadard tools:
+*** Big companies can afford to have a few devs working full time on this sort of thing
+*** Can work easily on other people's computers (although, this has almost never mattered for me. Like a few hours in my life vs like 20K hours so far in my own env)
+*** Can share tips more easily
+** On colemak:
+*** Colemak the layout itself is nice, and I think helped with my RSI
+*** It also forced me to touch type, which helped RSI and is a big deal on it's own (I failed to touch type qwerty multiple times b/c I would always go back to my default way)
+*** Buuuut, default vim keybindings are not sensible in colemak. This is fine if you only use vim keybindings in e.g. emacs or vim - just rebind them, but various ides etc support vim keybinds and they don't really seem to support rebinding.
+* Personal "culture"
+** What ways that I think about myself have been useful/not for my life?
+** Related to company culture, super mysterious to me until recently, e.g. how did Wave founders know that the values they picked would create a good culture?
+*** Asked them, but the answers were never satisfying to me - something like "have good mental models of people and understand how these values would affect things" + pick a minimal set of values which could be applied widely
+**** TODO Check this in AWA
+*** See: kool aid factory post
+** Related to "keep your identity small", in particular in that many of these have been bad for me
+** So, personal values that I've held and how they affect me
+*** Humbleness - I think of myself as being unassuming etc
+**** Seems to make me feel happier b/c not very bothered by other pepole thinking I'm not "fancy"
+**** Sometimes bad - maybe should have been more ambitious earlier in my career?
+*** Curious - self explanatory
+**** Good I think. Learning random things that I'm curious about pays off in unexpected ways? e.g. various details about how computers work, reading about culture+values leading to this.
+**** Can't really see this becoming bad unless lose ability to prioritise + get nerd sniped a lot? I'm a long way from this though! Maybe I should try to become more curious?
+*** Thinking that I'm clever
+**** This one has been actively bad for me any time I think it.
+**** Whenever I feel like this I switch from "trying to understand" mode to "trying not to look stupid" mode
+***** See Dan Luu post
+***** not-look-stupid mode is pretty unpleasant to be in - stressful if I'm not doing as well as I "should" at something, merely neutral when doing well
+*****  and v. bad at actually gaining understanding/improving
+***** I think this makes me not enjoy many puzzle games, b/c I think "It's just a game, I should be able to solve this easily" and subconsiously get upset when I can't.
+***** Should switch mindset to "I'm having fun and learning things"
+***** But, I mostly-accidentally managed to switch my mindset in things that matter!
+****** I had this mindset in my undergrad - thought of myself as good at maths/physics
+****** But as I moved into programming, I thought of myself as an outsider who was just having fun and learning things with no expectations.
+****** I'm still able to feel this way about it, even though I'm very much an insider by now & have spent way more time thinking about software than physics
+***** This has turned out really well,
+**** Annecdote: ingenious w/ Sylwia becoming stressful
+*** TODO Prioritising well?
+*** TODO Optimising for "things going well" overall and trying not to be swayed by direct incentives
+*** TODO Something-something music snobbery?
+* Thoughts/postmortem on PhD
+*** Possible that doing a PhD just beats the idea that you are good at anything out of you
+**** - undergrad even when things seem hard there's always an answer that you can reach in a relatively small amount of time and you'll be told if you got it wrong
+**** but outside of school - you can work on a problem for years and keep hitting dead ends/failing. Solutions might not even exist. It's so easy to fool yourself into thinkking you have the answer and later be proven wrong.
+**** Great for epistemic humility!
+** Should have thought way more about prioritisation
+*** At least one supervisor encouraged this, but I thought I was doing enough. I wasn't
+*** e.g. maybe should have done more initial research in python instead of investing in building high perf C++ code on the assumption that I would finish it all
+** Related: should have been less optimisitic about progress
+** Should have been way more skeptical of my code - lots more testing much earlier in the process
+*** Real progress started when I agressively cut down the scope, switched to python, started heavily unit testing
+*** It's easy to feel like your code is correct when it is horribly wrong
+** Sad that my code will probably never be used by anyone else
+*** But not sure if this is avoidable
+** Indexed too heavily on "seems interesting", "easy to get into"
+*** Indexed the right amount on "will this give me hard skills that I can use outside of academia"!
+*** Not enough on "is this research actually really important to anyone" - assumption that blue-sky research pays off?
