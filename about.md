@@ -3,7 +3,9 @@ layout: default
 title:  "About me"
 ---
 
-I'm David Shepherd, currently a software engineer building financial infrastructure in Africa at [Wave](http://wave.com/en).
+I'm David Nikel-Shepherd, a software engineer building financial infrastructure
+in Africa at [Wave](http://wave.com/en). I wrote more about Wave
+[here](http://techtrickery.com/writing-about-my-job.html).
 
 Previously I worked at [Biosite Systems](http://www.biositesystems.co.uk/).
 
@@ -12,4 +14,4 @@ computational methods for micromagnetics, machine learning techniques for
 recognising electromagnetic signals, and scheduling algorithms for scientific
 computing in the cloud.
 
-Get in touch at `[my name, no spaces or anything]7@gmail.com`.
+Get in touch at `[my first name]shepherd7@gmail.com`.
