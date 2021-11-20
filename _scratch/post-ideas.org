@@ -1,26 +1,3 @@
-* Complex developer setups - are they worth it
-** I don't know whether to recommend this to junior devs
-** Can take some work to be worthwhile
-** I hada lot of fun tweaking emacs, Linux, etc
-** It's also a great learning experience
-*** Find out how your OS works in more detail
-*** Debugging practice
-*** Experience with wide variety of languages/etc (mostly worse than what engs use in prod these days, but interesting sometimes)
-*** Forces you to learn to prioritise, e.g. just accept some minor issues b/c more work to fix than is worth it.
-*** Maybe encourages some product thinking? How do I want X to work
-** Even now I don't always want to do this
-** But, payoffs can be good
-*** e.g. test/snapshot runner keybinds; typechecking in editor
-*** Tiling window manager helps a lot with RSI
-*** Trivial to add most information to status bar, e.g. I added time in additional timezones, pending apt updates, my ip address b/c they were all useful to me. Each took like 1-5 minutes to figure out the right shell command to get the data and paste it into a config.
-** But if you use stanadard tools:
-*** Big companies can afford to have a few devs working full time on this sort of thing
-*** Can work easily on other people's computers (although, this has almost never mattered for me. Like a few hours in my life vs like 20K hours so far in my own env)
-*** Can share tips more easily
-** On colemak:
-*** Colemak the layout itself is nice, and I think helped with my RSI
-*** It also forced me to touch type, which helped RSI and is a big deal on it's own (I failed to touch type qwerty multiple times b/c I would always go back to my default way)
-*** Buuuut, default vim keybindings are not sensible in colemak. This is fine if you only use vim keybindings in e.g. emacs or vim - just rebind them, but various ides etc support vim keybinds and they don't really seem to support rebinding.
 * Personal "culture"
 ** What ways that I think about myself have been useful/not for my life?
 ** Related to company culture, super mysterious to me until recently, e.g. how did Wave founders know that the values they picked would create a good culture?
