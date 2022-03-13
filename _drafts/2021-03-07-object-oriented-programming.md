@@ -147,12 +147,24 @@ way to detect missing `print` implementation on a `Printable` type at compile
 time, but not all of them can detect if you forget to add an `elif` branch when
 you add a new type.
 
+I used to think that algebraic data types (i.e. tagged union types) were a
+replacement for this, but now I understand that implementing an interface is
+more flexible b/c it allows you to reuse your existing code for new
+implementations *without changes* to the existing code (e.g. even to add a new
+type). This is important for mocking! You don't want to have the types for mock
+objects in your real code.
+
 It's possible for a language to have support for polymorphism and interfaces
 without supporting the rest of OOP. For example [Rust's trait
 system](https://stevedonovan.github.io/rust-gentle-intro/object-orientation.html)
 which allows you to define an "interface" and implement it for anything, not
 just objects/classes.
 
+
+But, sometimes people assume that this will work better than it actually does.
+e.g. assuming that you can drop in a new database by implement a new interface
+is probably not going to go well, database is much too tightly coupled to your
+code in other implicit ways (e.g transactions, constraints)
 
 ## Inheritance for code sharing
 
@@ -215,20 +227,26 @@ of functions which have access to internal state.
 
 ## Shared state
 
-Implicit input arguments (the this object) make it harder to track what affects what.
-
-Similarly it's harder to track what can mutate the internal state.
+Implicit mutable input shared state (the this object) make it harder to track
+what affects what.
 
 These become much bigger problems when combined with inheritance for code
 sharing (code from other files can access/modify your "encapsulated" state) and
 [large objects](https://sourcemaking.com/antipatterns/the-blob) (code from other
 unrelated features can access/modify your state).
 
+
+ the proposed solution is to keep classes very small. This pretty much never happens in reality (or when it does, you end with a large morass of classes). Also the limit of small classes is just 
+
 Overly large classes seem to become the norm in long-lived OOP codebases,
 probably because it's so much easier to add a function to an existing class than
 to carefully redesign the class structure so that your change fits in cleanly.
 In procedural codebases it doesn't matter as much if you add one more function
 to a module because there (typically) isn't any module level state sharing.
+
+Antoher proposed solution: use classes with no state only function. But then you
+might as well just have namespaces/modules/etc. Except that in many languages
+you have to opt in to all of OO to get interface.
 
 
 ## "Everything must be a class"
