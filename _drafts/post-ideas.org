@@ -46,3 +46,19 @@
 ** Indexed too heavily on "seems interesting", "easy to get into"
 *** Indexed the right amount on "will this give me hard skills that I can use outside of academia"!
 *** Not enough on "is this research actually really important to anyone" - assumption that blue-sky research pays off?
+* How to get good at something in 2 steps and 10 years
+** Caveat: N=1
+** Caveat: requires you to really want to do X
+*** How to get hyped for something, e.g. how I accidentally did it for SWE
+** Step 1: read everything
+*** Have to integrate into a model in your head too
+** Step 2: Practice, feedback, improve, repeat
+*** feedback from self or others
+* Tactical level things that have improved my life
+** Blindfold
+** Coffee - mixed
+** Bouldering
+** Removing addictive apps
+** Frozen meal delivery
+** Being willing to spend money to save time
+* Object oriented development thoughts
