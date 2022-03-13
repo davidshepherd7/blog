@@ -15,7 +15,7 @@ url: http://techtrickery.com
 # url for testing
 # url: http://localhost:4000/
 
-gems:
+plugins:
   - jekyll-feed
 
 exclude: [Gemfile, Gemfile.lock, README.md, build.sh, preview.sh]
