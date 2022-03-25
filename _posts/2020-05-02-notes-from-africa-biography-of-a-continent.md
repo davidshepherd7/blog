@@ -66,7 +66,7 @@ been able to spot them.
 * All of the national borders in Africa divide ethnic groups and resources in stupid ways because they were drawn up by Europeans.
 * Border areas are relatively badly served by most infrastructure: the core infrastructure of the country they are in is far away and they aren't allowed to use the neighbouring country's.
 * Most colonies weren't actually productive at all (Rhoesia never made any money, the German colonies only lasted for 30 years and had major economic problems).
-* Germany had colonies! I didn't know that. They were actually treated comparatively well too.
+* Germany had colonies! I didn't know that. ~~They were actually treated comparatively well too~~. The book doesn't mention it but [the German military committed genocide  in what is now Namibia](https://en.wikipedia.org/wiki/German_colonial_empire#Rebellions_and_genocide).
 
 
 # Post world war 2
