@@ -1,76 +1,133 @@
+---
+layout: post
+title: "Dependency injection should be a language feature"
+date:   2022-09-03
+---
 
-First some terminology: I'll use "injectable" to mean an object that takes part
-in dependency injection, i.e. it has some dependencies that need to be injected
-and/or it can be injected as a dependency of other injectables.
+Dependency injection (and the whole ecosystem of patterns that go with it like
+service, repository and factory objects) is often necessary for writing simple
+tests of code that interacts with external or stateful services. There are
+alternative techniques, but they all have their own disadvantages (see
+[here](#Bonus content: alternatives to DI)).
 
-I'm also using DI here as shorthand for the whole ecosystem of Repository
-pattern + put-all-of-your-functions-in-service-objects + DI. The alternative to
-this is plain old free functions with one of the alternative ways of getting
-hold of stateful objects listed below. If you are already using the Java-esque
-"all functions live in service objects" style of programming then actual DI is a
-no-brainer because otherwise all of your services need to construct each other.
-This is the situation that most "advantages of DI" articles are covering.
+Unfortunately dependency injection and service objects can be quite confusing
+and requires a lot of boilerplate! I think a lot of the problem is that they
+reuse parts of OOP with meanings that are different to the usual meanings. Here
+by "usual meanings" I mean the dog-is-an-animal kind of examples that are used
+to teach OOP, or e.g. DDD's domain models for a more advanced example.
 
-I'm also sometimes mixing "DI" with "DI using a framework" because most people
-seem to end up using a framework eventually. I vaguely think that frameworkless
-DI is probably better in cases where your fellow engineers are not expected to
-all be DI experts, otherwise a framework is better (but this is weakly held).
+In particular:
 
-
-# The benefits of DI
-
-The main real benefit of using DI (over e.g. constructing objects inline or
-pulling them from a shared context) is that you can *easily* mock out
-dependencies where needed to allow you to write unit tests that e.g. don't do
-actual HTTP calls to a remote server.
-
-People
-[sometimes](https://www.quora.com/What-is-dependency-injection-and-what-are-advantages)
-claim another benefit that I have never seen actually matter: you can configure
-your production dependencies at runtime/in a config file. In practice I've never
-seen a case where you could just swap out e.g. your database for a different one
-and not cause subtle bugs all over your codebase. It's possible that this is
-useful in domains other than webapps?
-
-
-# What goes wrong
-
-* DI reuses parts of the language's syntax for objects to represent dependencies
-  between stateful things, i.e. it typically takes over ownership of constructor
-  arguments, using them to mean declaring a dependency instead of their usual
-  meaning as actual arguments.
-
-  So then people get confused about what kinds of arguments go where with
-  injectables. I've seen both non-injectables passed into constructors and
-  injectables passed as arguments to functions. If you are using a framework the
-  first mistake will usually cause some kind of error (often something
-  completely inscrutable), the second kind of mistake seems hard to
-  automatically detect.
-  
-* Languages already have ways of expressing the notion that something depends on
-  something else: when a (language-level) module depends on another module we
-  write an import statement, when functions depend on other functions this is
-  handled automatically. This works fine until you have long-lived state, and
-  then you need dependencies between object *instances* which is where DI
-  usually comes in.
-  
-  DI frameworks typically add a second kind of module, which is not necessarily
-  related to language modules (confusing!), and a whole new syntax for declaring
-  dependencies between object instances.
-
-* DI quickly pollutes the entire codebase: at least in the kind of codebases
-  I've worked on state management is a major concern, so much of the codebase
-  needs access to at least one injectable (e.g. the database). This one issue
-  forces most functions to be put into injectables, meaning large amounts of
-  additional error-prone boilerplate are needed.
+* For DI-able objects the meaning of constructor arguments changes from "data or
+  parameters for your class" to "a declaration of which other code your class
+  wants to call". Engineers unused to DI mix up these two things which,
+  depending on the implementation details, can lead to inscrutable errors
+  (Angular I'm looking at you), unexpected behaviour (e.g. changing these
+  arguments in one place affects other users of the service ), or just bad code
+  (e.g. needing to construct a new instance of a service to call a function with
+  different arguments).
   
   
-# Alternatives
+* But also languages already have ways of expressing the notion that your code
+  depends on something else: import statements. So DI adds another layer of
+  dependency, meaning more boilerplate and more confusion. And to make it worse
+  DI frameworks sometimes have a concept call "modules" which is not related to
+  the language's concept of modules! 
+  
+* If you want to use a member function of a DI-able object from somewhere that
+  DI isn't available (e.g. free functions, objects that are set up for you by a
+  framework) then things get more complicated.
+
+* DI quickly pollutes the entire codebase: if your code, or any code it calls,
+  ever needs access to a DI-able object then your code must be DI-able too. This
+  forces everything to be an object even when there's really no need, which
+  means extra boilerplate. 
+  
+* There's another footgun waiting here for junior (or just tired) engineers:
+  member variables in service objects also change their meaning from "data
+  stored by the class" to "dependencies, and maybe some globally-shared data".
+  If you forget this then you'll cause weird non-local bugs for other users of
+  the code.
+ 
+I think that these problems are independent of whether you write your injection
+code manually or use a framework like Dagger to generate it, and also mostly
+independent of whether you use constructor or member injection.
+
+
+But, there's one framework where I've seen most of these issues handled well:
+angularjs[3]. To start with here's a quick example of declaring a service
+object[2] in angular js:
+
+[^2] Technically in angular terminology this is a factory not a service, and a
+service is the same thing except using a `new`'d object, but I'm sticking with
+the service terminology for this article.
+
+[^3] I don't want to romanticise angularjs here: the lack of a type system
+sucked and viewmodels-plus-html-bindings seems like a clearly inferior way to
+build UIs since react came along.
+
+  ```
+  angular.module("foo").factory("myService", function(otherService) {
+      return {
+          myFunction: function(x) {
+              return x.cost + otherService(x).cost
+          }
+          otherFunction: // etc
+      }
+  })
+  ```
+  
+Let's see how this holds up to the problems listed above.
+
+* It doesn't use actual classes, so there's no existing "meaning" of constructor
+  arguments to contend with.
+  
+* If you follow this pattern then you are literally unable to pass non-DI
+  arguments to the outer lambda function because it's not accessible except to
+  angular itself.
+
+* This was pre-ES6 so the DI module system was the only module system (in
+  old-school javascript the build system would concatenate the entire
+  application into a single js file). So no duplication of the notions of
+  dependency or modules.
+
+* There are no memeber variables to accidentally use, again because there are no
+  classes involved. (Technically you could cause the same state-leaking bug by
+  capturing a variable in multiple closures, but you are unlikely to
+  accidentally do that because you would have to explicitly declare a variable.)
+   
+Unfortunately the advent of ES6 (with modules and classes) and the angular
+developers deciding to rewrite everything ruined this, Angular 2+'s dependency
+injection has all the problems that I've listed above.
+
+This is borne out by my experiences as well: I had no trouble learning to use
+angularjs's DI system despite having zero javascript or DI experience and not a
+lot of programming experience at all. In contrast when Angular 2 came along I
+found myself spending a lot of time reading their DI docs even though by then I
+had years of experience with javascript and with using angularjs' DI. The same
+thing seemed to hold true for my coworkers: I don't think I ever had to
+*explain* angularjs's DI (people just got it), whereas I had to explain Angular
+2's DI over and over. Similarly mistakes were almost non-existant with
+angularjs's DI but common with Angular's.
+
+So why did this work out so well? Essentially I think it's because in pre-ES6
+javascript the features that interact badly with DI were not there (or [were so
+weird that they were almost never
+used](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)).
+But this seems like a solvable problem: we could have languages where the only
+notion of modules and dependency are those used for DI, and DI doesn't force the
+use of classes in ways that overlap weirdly with their other uses. This would
+get us all the lovely testing benefits of DI without the boilerplate and
+confusion that is currently required.
+
+
+  
+### Bonus content: alternatives to DI
 
 Unfortunately the reason people use DI is because there is no silver bullet
-replacement for getting a small number of stateful object instances (e.g. the
-database or the frontend cache) into the rest of the codebase. But there are
-some alternatives with their own downsides:
+replacement for getting stateful object instances (e.g. the database or the
+frontend cache) into the rest of the codebase in way which is testable. But
+there are some alternatives each with their own downsides:
 
 
 * Pass the database as an argument to any functions that need it.
@@ -82,7 +139,8 @@ some alternatives with their own downsides:
   this additional function argument everywhere, and god help you if you find
   that you need a second kind of database!
   
-  I've used this approach in C++ and it was pretty much fine.
+  I've used this approach in a medium-sized C++ codebase and it was pretty much
+  fine.
 
 
 * Pass a context object to any functions that need it.
@@ -120,39 +178,4 @@ some alternatives with their own downsides:
   pattern encourages the use of a single transaction even for complex operations
   that span multiple domains. But, more things in a single transaction is a good
   thing unless/until you need to shard your database by domain. So we don't
-  regret having done this.
-   
-
-### My experiences
-
-I've worked on two large C++ codebases without dependency injection, they were mostly
-fine without it although once (in ~4 years) I had to do some unatural things
-with templates to be able to test something.
-
-I worked on one large angularjs project which used the builtin dependency
-injection. This went well: things were very testable even if they relied on
-things like timeouts or the window object because angular automatically mocked
-those for you. Most of the pain points didn't happen because this was pre-ES6 so
-the DI module system was the only module system (in old-school javascript we
-used to concatenate the entire application into a single js file, this was by
-default about as bad as you might expect for namespace collision problems etc).
-
-I then workend on a node/Angular2 project where we used the Angular2 DI
-framework in node as well. This was terrible and is the source of most of my
-concerns about DI. In fairness it was easily testable though.
-
-Next I worked on a large python monolith (Wave) with no DI. This has been by far
-the most pleasant-to-work-with system that I've ever worked on, I think largely
-because of constant concious attention being paid to this aspect (and e.g.
-prioritising this over people indulging their interests in shiny new
-technology). But back on topic: there's no DI and there's no need for DI,
-pythons builtin mock library is able to mock anything just fine.
-
-Finally, recently I've been looking at Wave's Android (Kotlin) codebase. This in
-theory uses manual (i.e. frameworkless) DI. Unfortunately DI in Android is
-complicated becuase the frame constructs so many of your objects (preventing
-constructor injection). So in practice we've ended up with an ad-hoc
-unprincipled mixture of manual DI, using the app object as a service locator,
-and just constructing objects inline. This has the expected negative
-consequences for testing and is something that we'll be working on fixing soon.
-
+  regret having done this. 
