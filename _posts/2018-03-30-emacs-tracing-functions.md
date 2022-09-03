@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Tracing macros in Emacs"
+date:   2018-03-30
 categories: emacs common-lisp debugging
 ---
 

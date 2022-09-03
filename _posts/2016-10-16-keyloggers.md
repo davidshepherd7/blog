@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "A one-line X11 keylogger"
+date: 2016-10-16
 categories: linux X11 security
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Debugging a slow system shutdown"
+date: 2016-10-16
 categories: linux systemd ninja
 ---
 

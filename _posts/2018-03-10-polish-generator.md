@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Polish nonsense phrase generator"
+date: 2018-03-10
 categories: polish grammar nlp
 custom_excerpt: "A program to generate grammatically correct Polish phrases."
 ---

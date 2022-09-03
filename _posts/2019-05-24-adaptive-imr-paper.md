@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: post
 title: "Publication: Adaptive-step implicit-midpoint-rule for time integration"
+date: 2019-05-24
 categories:
 ---
 

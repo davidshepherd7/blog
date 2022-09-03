@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Publication: Discretization-Induced Stiffness in Micromagnetic Simulations"
+date: 2015-06-10
 categories:
 ---
 

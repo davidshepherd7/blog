@@ -1,7 +1,8 @@
 ---
-layout: default
+layout: post
 title: "Notes from \"Africa: a biography of the continent\" by John Reader"
-categories:
+date:   2020-05-02
+categories: africa
 ---
 
 I read this book over the last few months hoping to get some more insight into
