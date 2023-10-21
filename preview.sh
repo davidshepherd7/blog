@@ -11,4 +11,4 @@ sleep 2s && firefox http://localhost:4000/ &
 
 # Rebuild and serve site, jekyll will watch for changes and constantly
 # rebuild.
-jekyll serve --host 127.0.0.1
+jekyll serve

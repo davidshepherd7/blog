@@ -6,15 +6,6 @@ timezone: Europe/London
 # Only use title in urls
 permalink: /:title.html
 
-# # url for compsoc
-# url: http://compsoc.man.ac.uk/~shep
-
-# url for AWS
-url: http://techtrickery.com
-
-# url for testing
-# url: http://localhost:4000/
-
 plugins:
   - jekyll-feed
 
