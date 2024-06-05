@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tracing macros in Emacs</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>Tracing macros in Emacs</h2>
+<p class="meta">30 Mar 2018</p>
+
+<div class="post">
+    <p>I’ve been playing around in common lisp lately, and one feature I particularly
+like is the trace macro. <code>trace</code> is a macro which lets you easily log the
+arguments and result of all calls to a function. It’s particularly handy for
+visualising recursive function calls.</p>
+
+<p>As you might expect Emacs has an equivalent macro. It’s called <code>trace-function</code>
+and is used like this:</p>
+
+<pre><code>(defun fact (n)
+  (if (= n 0) 1
+    (* n (fact (1- n)))))
+
+(trace-function #'fact)
+
+(fact 3)
+</code></pre>
+
+<p>which pops up a <code>*trace-output*</code> buffer containing</p>
+
+<pre><code>======================================================================
+1 -&gt; (fact 3)
+| 2 -&gt; (fact 2)
+| | 3 -&gt; (fact 1)
+| | | 4 -&gt; (fact 0)
+| | | 4 &lt;- fact: 1
+| | 3 &lt;- fact: 1
+| 2 &lt;- fact: 2
+1 &lt;- fact: 6
+</code></pre>
+
+<p>This is great if you’re working interactively, but I want to use it for
+debugging unit tests too. I run typically tests in batch mode using
+<a href="https://github.com/rejeep/ert-runner.el">ert-runner</a>, so the challenge is to
+get the trace macro to print to stdout instead of writing to a buffer.</p>
+
+<p>Unfortunately Emacs doesn’t have a simple way of redirecting a buffer to stdout.
+My somewhat hacky solution is to add the following code to my ert-runner
+<code>test-helper.el</code> file:</p>
+
+<pre><code>(defun log-trace-buffer (&amp;rest _)
+  (when (get-buffer trace-buffer)
+    (with-current-buffer trace-buffer
+      (message (buffer-substring-no-properties (point-min) (point-max))))))
+(add-to-list 'ert-runner-reporter-run-ended-functions #'log-trace-buffer)
+</code></pre>
+
+<p>which just dumps the entire contents of the trace output buffer to stdout when
+the tests finish. It’s not perfect but it’s enough for me to fix my tests!</p>
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

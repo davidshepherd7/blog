@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Debugging a slow system shutdown</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>Debugging a slow system shutdown</h2>
+<p class="meta">16 Oct 2016</p>
+
+<div class="post">
+    <p>I’ve read some interesting debugging stories recently, so here’s one of mine.
+Hopefully it might help others who have similar issues.</p>
+
+<p>Recently my laptop started taking <em>much</em> longer than usual to turn off:
+instead of ~1 second it would take ~20. Around the same time I had the exact
+same problem on my work machine which runs a different version of Ubuntu. So it
+seemed likely that the issue was something in my configuration rather than a
+real bug.</p>
+
+<p>I started by <a href="http://unix.stackexchange.com/questions/159221/how-display-log-messages-from-previous-boots-under-centos-7">enabling persistant systemd logs</a> so that I could
+read the logs recorded during a shutdown. Once that was set up I rebooted the
+laptop, then checked the logs with <code>journalctl --boot=-1</code>. Skimming through the
+last few items I noticed that there was a 28 second wait before the line
+<code>Stopped LSB: "privilege escalation detection system"</code> which seemed suspicious.</p>
+
+<p>Some more googling and I found <a href="https://askubuntu.com/questions/786596/random-stop-jobs-on-shutdown-bootup">this askUbuntu question</a> by someone
+having the same issue as me. It turns out that I’d unwittingly installed
+something called <a href="http://blog.bodhizazen.net/linux/how-to-ninja/">“ninja”</a> that watches out for suspicious looking
+programs running as root. I suspect that on both of my machines I had attempted
+to install <a href="https://ninja-build.org/">ninja-the-build system</a> (<code>apt-get install ninja-build</code>)
+and instead installed ninja-the-monitoring-daemon (<code>apt-get install ninja</code>).</p>
+
+<p>Moral of the story: check out unknown packages using <code>apt-cache show</code> before you install them!</p>
+
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

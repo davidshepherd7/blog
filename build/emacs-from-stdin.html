@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Reading from stdin to an emacs buffer</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>Reading from stdin to an emacs buffer</h2>
+<p class="meta">22 Nov 2014</p>
+
+<div class="post">
+    <p>Sometimes the way emacs utterly ignores standard unix conventions can be pretty annoying. In particular the fact that, unlike almost every other standard unix tool, you can’t give it <code>-</code> instead of a filename and have it read from stdin has always annoyed me (yes, I know emacs came from lisp machines not unix, but it’s been used on unix machines since <a href="http://en.wikipedia.org/wiki/GNU_Emacs#History">before I was born</a>). So today I’ve final sat down and figured out how to hack around this limitation.</p>
+
+<p>First of all I should note that there is an existing package called <a href="https://github.com/lewang/e-sink"><code>e-sink</code></a> to read from stdin. However the code seems unnecessarily complex (probably doesn’t help that I don’t know perl).</p>
+
+<p>So, here’s my solution:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># The emacs or emacsclient to use</span>
+<span class="k">function </span>_emacsfun
+<span class="o">{</span>
+    <span class="c"># Replace with `emacs` to not run as server/client</span>
+    emacsclient <span class="nt">-c</span> <span class="nt">-n</span> <span class="nv">$@</span>
+<span class="o">}</span>
+
+
+<span class="c"># An emacs 'alias' with the ability to read from stdin</span>
+<span class="k">function </span>e
+<span class="o">{</span>
+    <span class="c"># If the argument is - then write stdin to a tempfile and open the</span>
+    <span class="c"># tempfile.</span>
+    <span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> <span class="o">==</span> - <span class="o">]]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">tempfile</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp </span>emacs-stdin-<span class="nv">$USER</span>.XXXXXXX <span class="nt">--tmpdir</span><span class="si">)</span>
+        <span class="nb">cat</span> - <span class="o">&gt;</span> <span class="nv">$tempfile</span>
+        _emacsfun <span class="nt">-e</span> <span class="s2">"(progn (find-file </span><span class="se">\"</span><span class="nv">$tempfile</span><span class="se">\"</span><span class="s2">)
+                             (set-visited-file-name nil)
+                             (rename-buffer </span><span class="se">\"</span><span class="s2">*stdin*</span><span class="se">\"</span><span class="s2"> t))
+                 "</span> 2&gt;&amp;1 <span class="o">&gt;</span> /dev/null
+    <span class="k">else
+        </span>_emacsfun <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+    <span class="k">fi</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>If you prefer to use a standalone emacs just replace <code>emacsclient -c -n</code> in <code>_emacsfun</code> with <code>emacs</code>.</p>
+
+<p>The function is called as</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">"hello world"</span> | e -</code></pre></figure>
+
+<p>or</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">e hello_world.txt</code></pre></figure>
+
+<p>One more note: each time you read from stdin a temporary file in <code>/tmp</code> is created, these are typically cleared on reboot which is good enough for me. If you need them to be gone immediately you could add <code>rm $tempfile</code> inside the <code>if</code> statement.</p>
+
+<p>As always the code is <a href="https://github.com/davidshepherd7/emacs-read-stdin">on github</a>.</p>
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

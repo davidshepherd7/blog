@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tearing out the Emacs windows manager</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>Tearing out the Emacs windows manager</h2>
+<p class="meta">03 Oct 2013</p>
+
+<div class="post">
+    <p><em>Edit: I’ve created a <a href="https://github.com/davidshepherd7/frames-only-mode">small emacs package</a> based on this post.</em></p>
+
+<p>There’s an old joke: “Emacs is a great operating system, but it’s a shame they didn’t include a decent text editor”. Obviously since I’m writing about Emacs I don’t agree with the second part, but it’s hard to argue that Emacs’ feature list isn’t a little over the top. This post will describe how to go a small way towards fixing that by replacing Emacs’ built in <a href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a> with something more general.</p>
+
+<p>Before I talk about anything else I want to mention the <a href="http://blasphemousbits.wordpress.com/2007/05/04/learning-emacs-part-4-buffers-windows-and-frames/">terminology that Emacs uses to describe windows</a>. The thing that most people would call a window is labelled a “frame” in Emacs language. The sub-sections of a single frame are (annoyingly) called “windows”. By default almost everything in Emacs is handled by opening new “windows” inside a single frame. The layout of these windows is handled by a built-in tiling window manager.</p>
+
+<h2 id="so-whats-wrong-with-emacs-tiling-window-manager">So what’s wrong with Emacs’ tiling window manager?</h2>
+
+<p>My main reason for disliking the built in windows manager is that it assumes everything you want to work with is inside Emacs. There’s no support for tiling a chromium window or a terminal along with a few Emacs windows. This probably worked quite well when people did everything in a single terminal session but not so much anymore.</p>
+
+<p>Secondly if your main windows manager is also tiling then the two will conflict with each other in annoying ways. For example opening a new terminal emulator will completely wreck your nicely laid out Emacs windows.</p>
+
+<p>Finally it means you need two separate sets of keys to do almost the same thing inside or outside of Emacs. Pretty nasty and pointless!</p>
+
+<h2 id="using-frames-instead-of-emacs-windows">Using frames instead of Emacs windows</h2>
+
+<p>The easiest solution to these problems is (try) to never open multiple Emacs windows inside a single frame. One setting takes care of this in a lot of places:</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">    ;; Make new frames instead of new windows
+    (set 'pop-up-frames 'graphic-only)</code></pre></figure>
+
+<p>Unfortunately this doesn’t so well work with the “grand-unified-debugger” mode (gud), which is used for running <code>gdb</code> etc. To try to control gud’s window spam we can set:</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">(set 'gdb-use-separate-io-buffer nil)
+(set 'gdb-many-windows nil)</code></pre></figure>
+
+<p>It’s not perfect but it should reduce the number of windows spawned.</p>
+
+<p>Similarly for org mode we need to change some extra settings</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">(set 'org-agenda-window-setup 'other-frame)
+(set 'org-src-window-setup 'other-frame)</code></pre></figure>
+
+<p>Finally we need to modify some settings in the emacs window manager to prevent weird stuff happening when we follow links:</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">;; Focus follows mouse off to prevent crazy things happening when I click on
+;; e.g. compilation error links.
+(set 'mouse-autoselect-window nil)
+(set 'focus-follows-mouse nil)</code></pre></figure>
+
+<h2 id="dealing-with-temporary-buffers">Dealing with temporary buffers</h2>
+
+<p>So now we have an Emacs that (mostly) spawns new frames instead of windows. This means it spawns a new frame every time it wants to show you, for example, a list of potential completions. Unfortunately by default these frames are left lying around after you are done with the temporary buffer, which gets very annoying!</p>
+
+<p>Again one setting will deal with most cases of this problem (the difficulty is in finding the required setting):</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">;; kill frames when a buffer is buried, makes most things play nice with
+;; frames
+(set 'frame-auto-hide-function 'delete-frame)</code></pre></figure>
+
+<p>Now whenever a buffer is buried (usually by pressing “q” in a temp buffer or by selecting a completion candidate) the containing frame will be killed as well.</p>
+
+<p>Unfortunately this doesn’t work with a few packages, in particular <a href="http://www.gnu.org/software/auctex/reftex.html">RefTeX</a>’s reference selection buffer has been a problem for me. Luckily there is a hook called when a buffer is killed that we can use to also close the frame.</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">(defvar kill-frame-when-buffer-killed-buffer-list
+  '("*RefTeX Select*" "*Help*" "*Popup Help*")
+  "Buffer names for which the containing frame should be
+  killed when the buffer is killed.")
+
+(defun kill-frame-if-current-buffer-matches ()
+  "Kill frames as well when certain buffers are closed, helps stop some
+  packages spamming frames."
+ (interactive)
+ (if (member (buffer-name) kill-frame-when-buffer-killed-buffer-list)
+     (delete-frame)))
+
+(add-hook 'kill-buffer-hook 'kill-frame-if-current-buffer-matches)</code></pre></figure>
+
+<h2 id="integrating-with-the-windows-manager">Integrating with the windows manager</h2>
+
+<p>Half the point of a tiling window manager is to be able to launch and kill windows easily and quickly, but what if we accidentally kill the last Emacs frame? If we are running Emacs in the normal way it will save and close down, then next time we launch it all the start up code has to execute again.</p>
+
+<p>A better way to handle this is to run Emacs in server (a.k.a. daemon) mode. This means you start an emacs server which stays running in the background and you spawn/kill instances of emacsclient as you work. As an additional benefit it means that all your emacs instances share the same buffers, history, settings, etc.</p>
+
+<p>To run emacs in server mode simply add the following to your config files:</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">;; Start emacs as a server
+(server-start)</code></pre></figure>
+
+<p>easy!</p>
+
+<p>Now we need to create some new commands for launching emacsclients instead of emacs itself. First a bash alias:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s1">'emacsclient -c -n -e'</span></code></pre></figure>
+
+<p>The <code>-c</code> creates a new frame and the <code>-n</code> detaches the client from the bash console. Handily if you run this command when no server exists it will create one before launching the client.</p>
+
+<p>Finally we want a command which we can bind to a button in the window manager to launch a new emacsclient. For this I use a slightly modified version of the alias above (I use <a href="http://xmonad.org/">xmonad</a> so this code actually just creates a haskell string which I later bind a key to execute as shell command):</p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">myEditor</span> <span class="o">=</span> <span class="s">"emacsclient -c -n -e '(switch-to-buffer nil)'"</span></code></pre></figure>
+
+<p>You can see I’ve added an argument <code>-e '(switch-to-buffer nil)'</code>, this prevents the new client from opening the file named as an argument. Since we don’t name any files for it to open the client would go to the scratch buffer by default, which is fairly useless. With this command it opens whichever buffer was most recently closed instead, much better!</p>
+
+<h2 id="appendix-dealing-with-auto-complete">Appendix: Dealing with auto-complete</h2>
+
+<p><em>I removed this section due to finding some new settings (the section on Dealing with temporary buffers) that allow easy closing of the frames spawned for temporary windows. Using ido was a work-around for the same problem for completion buffers only. I’m leaving this here anyway because ido is vastly superior to the default completion mechanisms (in my opinion at least).</em></p>
+
+<p>The best way I’ve found to avoid problems with extra autocompletion buffer frames is to use the wonderful <code>ido</code> package, which displays completions inside the minibuffer instead. To make it work for everything you might want to auto-complete you’ll also need the <code>ido-ubiquitous</code> and <code>smex</code> packages. Completion is now done with a handy menu looking something like this</p>
+
+<p><img src="/ido.png" alt="illustration of ido " /></p>
+
+<p>Well, actually to get it do show completions in a vertical list you need a little bit more configuration:</p>
+
+<figure class="highlight"><pre><code class="language-scm" data-lang="scm">;; Display ido results vertically, rather than horizontally
+(set 'ido-decorations '("\n-&gt; " "" "\n   " "\n   ..." "[" "]" " [No match]"
+                        " [Matched]" " [Not readable]" " [Too big]"
+                        " [Confirm]"))</code></pre></figure>
+
+<p>There are plenty of key bindings and settings to mess with in <code>ido</code>, but that would be an entire other blog post. <a href="http://www.emacswiki.org/emacs/InteractivelyDoThings#toc1">Emacswiki</a> has plenty of stuff to play with as usual.</p>
+
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

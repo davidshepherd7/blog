@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Polish nonsense phrase generator</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2 id="polish-nonesense-phrase-generator">Polish nonesense phrase generator</h2>
+
+<div class="jumbotron" style="margin-top: 1em">
+<div id="output" class="lead text-center"></div>
+
+<div style="height: 2em">
+    <div id="translation" class="text-muted text-center"> </div>
+</div>
+</div>
+
+<p><button class="btn btn-primary" style="margin-top: 1em;" type="button" onclick="ctrl.generate()">
+    Generate some nonsense
+</button> 
+<button class="btn btn-default" style="margin-top: 1em;" type="button" onclick="ctrl.toggleTranslation()">
+    Toggle translation
+</button></p>
+
+<script src="http://cdn.rawgit.com/davidshepherd7/polish-generator/v3-pronoun-fixes/bundle.js"></script>
+
+<h3 id="what">What??</h3>
+
+<p>This attempts to generate grammatically valid but semantically meaningless
+Polish sentences. At the moment it’s very simple and can only generate sentences
+of the form “Noun Verb” (e.g. the boy runs, the dog eats, etc), with the
+occasional adjective thrown in. There are probably mistakes, I’m still learning!</p>
+
+<h3 id="but-why">But why?</h3>
+
+<p>I’m learning Polish (slowly) and I recently came across an English sentence
+generator in <a href="https://github.com/norvig/paip-lisp/">Paradigms of AI Programming</a>, 
+so I thought it might be fun to put the two together.</p>
+
+<h3 id="technology">Technology</h3>
+
+<p>I started out using common lisp (following the examples in PAIP), but then
+decided I wanted to show the results in a webpage so I switched to typescript
+(because type safety makes life much much easier).</p>
+
+<p>I prototyped the generator as a console application in node, then once I was
+happy with the logic I used <a href="http://browserify.org/">browserify</a> to bundle the
+compiled javascript with the dependencies in way that browsers can handle. I’m
+really impressed with how easy it was to use compared to gulp or webpack: just
+run <code>browserify index.js -o bundle.js</code> (where <code>index.js</code> is a node application)
+and then serve <code>bundle.js</code>.</p>
+
+<p>I used a bit of a hack to expose the necessary functions to the html. In
+<code>index.ts</code> I put:</p>
+
+<pre><code>(window as any).ctrl = {
+    generate,
+    toggleTranslation,
+    /* etc */
+}
+</code></pre>
+
+<p>which seems to work nicely.</p>
+
+<p>The source code is <a href="https://github.com/davidshepherd7/polish-generator">on github</a>.</p>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>urxvt</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>urxvt</h2>
+<p class="meta">01 Oct 2013</p>
+
+<div class="post">
+    <p><code>urxvt</code> is a lightweight, platform independent unicode-compatible terminal emulator. This is probably the least interesting of the various tools I’ve set up for programming so I thought I’d do it first.</p>
+
+<h2 id="why-use-it">Why use it?</h2>
+
+<ul>
+  <li>
+    <p>It is configured by a simple text file</p>
+
+    <p>This means when I set up a new system (or, more likely, install a new
+  version of linux) all I need to do to get things set up is copy a file into
+  <code>~/</code>. While terminal settings are not really a big deal (pretty colours
+  mostly…) it’s much easier than all the clicking through menus needed to
+  set up something like <code>mate-terminal</code>.</p>
+  </li>
+  <li>
+    <p>It works on any linux distribution</p>
+
+    <p>Pretty self explanatory really. If I decide at some point to drop
+  gnome-based linux distributions (which I nearly did a few months ago) I
+  don’t want to have to find new versions of various programs.</p>
+  </li>
+  <li>
+    <p>It supports unicode, which lets you have maths characters in your
+terminal.</p>
+  </li>
+</ul>
+
+<p>I’m sure there are plenty of terminal emulators which fufil these criteria but I’d heard (well, read) good things about urxvt so I gave it a try and it works nicely.</p>
+
+<h2 id="the-setup">The setup</h2>
+
+<p>There should be packages available in pretty much any linux distribution. <code>rxvt-unicode</code> is the package name in Debian etc.</p>
+
+<p>As mentioned above there isn’t all that much to configure here.</p>
+
+<p>The following settings go in the <code>~/.Xdefaults</code> file (for historical reasons related to <code>xterm</code> I think).</p>
+
+<p>Set some nice colours:</p>
+
+<pre><code>! Colors
+*background:                    #262626
+*foreground:                    #c2c2b0
+
+! Black + DarkGrey
+*color0:                        #262626
+*color8:                        #73675b
+! DarkRed + Red
+*color1:                        #a64211
+*color9:                        #cc5214
+! DarkGreen + Green
+*color2:                        #638046
+*color10:                       #80a65b
+! DarkYellow + Yellow
+*color3:                        #bf8c25
+*color11:                       #e6a82d
+! DarkBlue + Blue
+*color4:                        #4d6d99
+*color12:                       #6088bf
+! DarkMangenta + Mangenta
+*color5:                        #996b89
+*color13:                       #bf86ac
+! DarkCyan + Cyan
+*color6:                        #6b8e99
+*color14:                       #86b1bf
+! LightGrey + White
+*color7:                        #998a7a
+*color15:                       #c2c2b0
+</code></pre>
+
+<p>Use pretty fonts:</p>
+
+<pre><code>urxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
+</code></pre>
+
+<p>Do some fake transparency:</p>
+
+<pre><code>! Transparent background
+URxvt*transparent: true
+URxvt*shading: 20
+</code></pre>
+
+<p>With these transparency settings urxvt will display the desktop wallpaper through the back of the terminal. However this stays the same even if there are other windows underneath it, which is why I canlled it fake. If you use a tiling window manager (like me) this isn’t a problem because windows are almost never on top of each other. Alternatively, if you’re using a compositing window manager (or running <code>xcompmgr</code>) you can use the following settings to get real transparency:</p>
+
+<pre><code>urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
+</code></pre>
+
+<p>Unfortunately with my setup this causes a bug where the border of <code>urxvt</code> windows is the wrong colour. It looks pretty ugly so I just stick with the fake transparency.</p>
+
+<p>If you have transparency on you’ll probably want to disable the scroll bar with:</p>
+
+<pre><code>URxvt*scrollBar: false
+</code></pre>
+
+<p>otherwise it looks very strange. You don’t really need a scroll bar anyway: shift-pgup/pgdown is easier.</p>
+
+<p>Finally there are some actually useful (rather than just pretty) settings:</p>
+
+<pre><code>! Save lots of lines
+URxvt*saveLines:32767
+
+! Only reset scroll position on keypress
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyOutput: false
+URxvt.scrollTtyKeypress: true
+</code></pre>
+
+<p>These options are very useful (necessary really) when you have a process generating output very quickly and you need to actually see it.</p>
+
+<h2 id="final-notes">Final notes</h2>
+
+<p>There are a couple of gotchas when configuring <code>urxvt</code>:</p>
+
+<ul>
+  <li>
+    <p>Comments CANNOT go at the end of lines! I wasted a lot of time trying to figure out why some of my colours had changed to a violent pink. Turns out adding a comment after a colour setting modifies the colour value and almost always makes it an invalid colour, which comes out pink.</p>
+  </li>
+  <li>
+    <p>Settings don’t apply until you restart the X-server! Or at least they don’t with my setup (running a <code>.Xsession</code> script with various mint goodies).</p>
+  </li>
+</ul>
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>

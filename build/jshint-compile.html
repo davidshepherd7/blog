@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>jshint and emacs' compile command</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Normaliser CSS (makes things look the same on all browsers, this
+         has to go first. -->
+    <link rel="stylesheet" href="/css/normalize.css">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <h1 class="title"><a href="/">
+            Typical Technological Trickery</a></h1>
+      </header>
+    </div>
+
+    <div class="flex-container">
+
+        <!-- MAIN CONTENT -->
+        <div id="main_content_wrap" class="outer">
+            <section id="main_content" class="inner">
+                <h2>jshint and emacs' compile command</h2>
+<p class="meta">22 Jun 2014</p>
+
+<div class="post">
+    <p><a href="http://www.jshint.com/about/"><code>jshint</code></a> is a helpful static code checker for finding potentially problematic code in javascript. This post explains how to run jshint from emacs and easily jump to the errors using emacs’ <code>compile</code> command. The setup required is not especially complex but could be mildly tricky to figure out for people new to emacs.</p>
+
+<h1 id="the-code">The code</h1>
+
+<p>The additional emacs lisp code needed is simply:</p>
+
+<pre><code>;; Add parsing of jshint output in compilation mode
+(add-to-list 'compilation-error-regexp-alist-alist '(jshint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), " 1 2 3))
+(add-to-list 'compilation-error-regexp-alist 'jshint)
+</code></pre>
+
+<p>(Add this code to a config file that is loaded by emacs, typically <code>.emacs</code> or <code>.emacs.d/init.el</code>.)</p>
+
+<p>To “compile” with <code>jshint</code> run the emacs command <code>compile</code> in a buffer in your javascript directory with the compilation command:</p>
+
+<pre><code>jshint *.js
+</code></pre>
+
+<p>(or use an alternative shell glob to select the files you want to check). The compilation buffer should appear and should allow you to step through errors just like using a real compiler.</p>
+
+<h1 id="explanation">Explanation</h1>
+
+<p>Compilation mode extracts error location information using a simple parser consisting of a regular expression and a few other bits of information. In the commands above we added a parser for the error messages from <code>jshint</code>.</p>
+
+<p>New parsers are defined by a list as specified in the documentation for <code>compilation-error-regexp-alist</code>. Our <code>jshint</code> parser is as follows:</p>
+
+<pre><code>(jshint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), " 1 2 3)
+</code></pre>
+
+<p>The first element is the name of the parser. The second argument is a string containing the regex itself. The final arguments are the numbers of the matches (the first match is numbered 1) which specify the file, the line number and the column number respectively.</p>
+
+<p>In fact emacs stores the parser information in a slightly more complex way. There are two lists: a list of available parsers (<code>compilation-error-regexp-alist-alist</code>) and a list of which parsers to use (<code>compilation-error-regexp-alist</code>). In the code above the first line defines the parser and adds it to the list of available parsers. The second line adds our new parser to the list of parsers to use.</p>
+
+<h1 id="related-tipsgotchas">Related tips/gotchas</h1>
+
+<ul>
+  <li>
+    <p>The command to step through errors is <code>next-error</code>, you should bind it to a key in both javascript mode and compiliation mode.</p>
+  </li>
+  <li>
+    <p>Also bind the commands <code>compile</code> and <code>recompile</code> to easy to press keys for best effect.</p>
+  </li>
+  <li>
+    <p>If you’re installing <code>jshint</code> on a Debian-based system via <code>npm</code> you may need the additional package <code>nodejs-legacy</code> to deal with name clashes (there are multiple Debian packages with binaries named <code>node</code>. So the node binary installed by the standard nodejs package is called <code>nodejs</code> instead. Not many <code>npm</code> packages  handle this correctly. The <code>nodejs-legacy</code> package adds a binary named <code>node</code>.).</p>
+  </li>
+</ul>
+
+</div>
+
+            </section>
+        </div>
+
+        <!-- Dummy block to center main content -->
+        <div class="flex-dummy"></div>
+
+        <nav>
+            <h3> Work </h3>
+
+            I work on building affordable financial infrastructure for
+            sub-Saharan Africa at <a href="https://www.wave.com/en/">Wave mobile
+            money</a>.
+
+            <h3> Emacs Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/electric-operator">electric-operator</a>
+                    </div>
+                    Insert spacing around operators as you type
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/terminal-here"> terminal-here</a>
+                    </div>
+                    Open a terminal emulator in a file's directory
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/frames-only-mode">frames-only-mode</a>
+                    </div>
+                    Play nicely with tiling window managers
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/aggressive-fill-paragraph-mode">aggressive-fill-paragraph-mode</a>
+                    </div>
+                    Autofill paragraphs as you type
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/fill-function-arguments">fill-function-arguments</a>
+                    </div>
+                    Line wrap/unwrap function arguments
+                </li>
+
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/emacs-read-stdin">emacs-read-stdin</a>
+                    </div>
+                    An alias that can read from stdin
+                </li>
+            </ul>
+
+            <h3> Other Projects </h3>
+            <ul class="projects-list">
+                <li class="project">
+                    <div class="project-name">
+                        <a href="https://github.com/davidshepherd7/ankicli">ankicli</a>
+                    </div> Command line interface for <a href="https://en.wikipedia.org/wiki/Anki_(software)">Anki</a>
+                </li>
+                <li class="project">
+                    <div class="project-name">
+                        <a href="/polish-generator.html">polish-nonsense</a>
+                    </div> Generate grammatically correct Polish
+                </li>
+            </ul>
+
+
+            <h3> Etc </h3>
+            <p>
+                <a href="https://github.com/davidshepherd7"><img src="GitHub-Mark-32px.png"></a>
+                <a href="/feed.xml"><img src="rss.png"></a>
+            </p>
+            <ul class="projects-list">
+                <li><a href="/about.html">About me</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+  </body>
+</html>
